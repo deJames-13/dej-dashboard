@@ -10,7 +10,7 @@ function UserSection({ user }) {
         <div className="max-w-md">
           <h3 className="text-4xl font-semibold">Welcome,</h3>
           <h1 className="text-5xl font-bold">
-            <TextRainbow text={user?.name || 'Private User'} />
+            <TextRainbow text={user?.username || 'Private User'} />
           </h1>
           <p className="py-6">
             This route is for authenticated users only. You should modify the logic for this route to fit your

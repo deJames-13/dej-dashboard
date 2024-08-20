@@ -1,5 +1,6 @@
 import { useToggle } from '@common';
 import { Sidebar as SidebarComponent, TextRainbow } from '@common/components';
+import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
 import { Button, Menu } from 'react-daisyui';
 import { BsPinAngleFill } from 'react-icons/bs';
@@ -154,14 +155,11 @@ const SideContent = ({ pin, togglePin, toggleVisible, side, noOverlayEvent = fal
           <div className="mt-auto">
             <div className="divider"></div>
             <div className="p-4 ">
-              <Button
+              <AuthLogout
                 color="error"
                 variant="outline"
                 className="w-full "
-              >
-                <FaArrowAltCircleRight />
-                Logout
-              </Button>
+              />
             </div>
           </div>
         </div>

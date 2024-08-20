@@ -1,5 +1,6 @@
 import { useCheckAuth, useLogout } from '@custom';
 import React from 'react';
+import { Button } from 'react-daisyui';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
 
 export default function AuthLogout(buttonProps) {
@@ -8,14 +9,15 @@ export default function AuthLogout(buttonProps) {
   return (
     userInfo && (
       <form onSubmit={handleLogout}>
-        <button
+        <Button
           type="submit"
-          className="btn btn-primary btn-outline"
+          color="primary"
+          variant="outline"
           {...buttonProps}
         >
           <FaArrowRightFromBracket />
           Log Out
-        </button>
+        </Button>
       </form>
     )
   );

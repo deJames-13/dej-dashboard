@@ -1,5 +1,6 @@
 import { useToggle } from '@common';
 import { Sidebar as SidebarComponent } from '@common/components';
+import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
 import { Button, Dropdown, Menu } from 'react-daisyui';
 import {
@@ -36,7 +37,7 @@ const SideContent = ({ side }) => {
               </span>
             </Dropdown.Details.Toggle>
             <Dropdown.Menu className="absulute w-52 z-[100!important]">
-              <Dropdown.Item>Item 1</Dropdown.Item>
+              <Dropdown.Item>Item 1</Dropdown.Item>import {AuthLogout} from '@features';
               <Dropdown.Item>Item 2</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown.Details>
@@ -53,13 +54,7 @@ const SideContent = ({ side }) => {
           <div className="mt-auto">
             <div className="divider"></div>
             <div className="p-4 ">
-              <Button
-                color="error"
-                variant="outline"
-                className="w-full "
-              >
-                <FaArrowAltCircleRight />
-              </Button>
+              <AuthLogout />
             </div>
           </div>
         </div>
