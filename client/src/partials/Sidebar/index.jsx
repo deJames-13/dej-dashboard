@@ -10,7 +10,9 @@ function Sidebar(props) {
     <CustomSidebar
       open={props.visible || pin}
       onClickOverlay={props.toggleVisible(pin)}
-      sideClassName={`w-60 md:min-w-60 md:w-80 md:max-w-xs  ${props.visible || pin ? '2xl:block 2xl:relative' : ''} `}
+      sideClassName={`z-[70] w-60 md:min-w-60 md:w-80 md:max-w-xs  ${
+        props.visible || pin ? '2xl:block 2xl:relative' : ''
+      } `}
       side={
         <SideContent
           togglePin={togglePin}

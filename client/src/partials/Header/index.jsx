@@ -33,7 +33,7 @@ const MenuList = () => {
 function Header({ clickLogo }) {
   return (
     <>
-      <Navbar className="sticky z-[1000] top-0 w-full bg-base-200">
+      <Navbar className="sticky z-[69] top-0 w-full bg-base-200">
         <Navbar.Start>
           <Dropdown className=" md:hidden">
             <Dropdown.Toggle>
