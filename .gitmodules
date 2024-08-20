@@ -1,0 +1,6 @@
+[submodule "server"]
+	path = server
+	url = https://github.com/deJames-13/dej-server-starter.git
+[submodule "client"]
+	path = client
+	url = https://github.com/deJames-13/dej-react-starter.git
