@@ -1,4 +1,5 @@
 import { TextRainbow, ThemeToggler } from '@common/components';
+import { AuthLogout } from '@features';
 import { Button, Dropdown, Navbar } from 'react-daisyui';
 import { FaBars, FaGithubAlt } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
@@ -31,7 +32,7 @@ const MenuList = () => {
 function Header({ clickLogo }) {
   return (
     <>
-      <Navbar className="sticky top-0 w-full bg-base-200">
+      <Navbar className="sticky z-[1000] top-0 w-full bg-base-200">
         <Navbar.Start>
           <Dropdown className=" md:hidden">
             <Dropdown.Toggle>
@@ -52,15 +53,7 @@ function Header({ clickLogo }) {
           <MenuList />
         </Navbar.Center>
         <Navbar.End>
-          <Button
-            tag="a"
-            href="https://github.com/deJames-13/dej-react-starter"
-            color="primary"
-            variant="outline"
-          >
-            <FaGithubAlt />
-            <span className="hidden md:block">View in GitHub</span>
-          </Button>
+          <AuthLogout />
         </Navbar.End>
       </Navbar>
     </>

@@ -1,22 +1,22 @@
+import { useCheckAuth, useLogout } from '@custom';
 import React from 'react';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
 
-const onSubmit = async (values, actions) => {
-  await new Promise((resolve) => setTimeout(resolve, 1000));
-  toast.success('Logout  successfully');
-  actions.resetForm();
-};
 export default function AuthLogout(buttonProps) {
+  const handleLogout = useLogout();
+  const userInfo = useCheckAuth(true);
   return (
-    <form onSubmit={onSubmit}>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        {...buttonProps}
-      >
-        <FaArrowRightFromBracket />
-        Log Out
-      </button>
-    </form>
+    userInfo && (
+      <form onSubmit={handleLogout}>
+        <button
+          type="submit"
+          className="btn btn-primary btn-outline"
+          {...buttonProps}
+        >
+          <FaArrowRightFromBracket />
+          Log Out
+        </button>
+      </form>
+    )
   );
 }

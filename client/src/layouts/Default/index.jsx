@@ -1,7 +1,9 @@
+import { useCheckAuth } from '@custom';
 import { FooterWrapper, Header } from '@partials';
 import { Outlet } from 'react-router-dom';
 
 function DefaultLayout() {
+  useCheckAuth();
   return (
     <div id="default-layout">
       <Header />

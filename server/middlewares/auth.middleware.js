@@ -1,12 +1,10 @@
 import { PRIVILEGES } from '#constants';
 import { UserService } from '#features';
-import { Errors, getBearerToken, verifyToken } from '#utils';
+import { Errors, verifyToken } from '#utils';
 
 export const protect = async (req, res, next) => {
-  let token =
-    getBearerToken(req) ||
-    req.cookies.jwt ||
-    req.cookies[UserService.authToken];
+  let token = req.cookies.jwt || req.cookies[UserService.authToken];
+  // let token =  getBearerToken(req) ; for Authorization: Bearer token
 
   if (!token) throw new Errors.AuthorizationError();
   try {

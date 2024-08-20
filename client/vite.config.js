@@ -7,5 +7,11 @@ export default defineConfig({
   plugins: [react(), tsconfigPaths()],
   server: {
     port: 3000,
+    proxy: {
+      '/api/v1': {
+        target: 'http://localhost:5000',
+        changeOrigin: true,
+      },
+    },
   },
 });

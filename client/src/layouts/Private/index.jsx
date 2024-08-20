@@ -1,12 +1,13 @@
 import { useToggle } from '@common';
+import { useCheckAuth } from '@custom';
 import { FooterWrapper, Header, Sidebar } from '@partials';
 import { Outlet } from 'react-router-dom';
+
 function PrivateLayout() {
-  const user = {
+  const [visible, toggleVisible] = useToggle(false);
+  const userInfo = useCheckAuth(true) || {
     name: 'Private User',
   };
-  const [visible, toggleVisible] = useToggle(false);
-
   return (
     <div
       id="private-layout"
@@ -19,7 +20,7 @@ function PrivateLayout() {
         <div className="relative w-full">
           <Header clickLogo={toggleVisible()} />
           <div className="container grid min-h-screen mx-auto place-items-center">
-            <Outlet context={{ user }} />
+            <Outlet context={{ userInfo }} />
           </div>
           <FooterWrapper />
         </div>

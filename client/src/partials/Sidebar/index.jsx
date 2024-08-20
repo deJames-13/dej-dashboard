@@ -47,18 +47,18 @@ const SideContent = ({ pin, togglePin, toggleVisible, side, noOverlayEvent = fal
               </Link>
             </Menu.Item>
             <Menu.Item>
-              <div class="collapse collapse-arrow p-0 m-0">
+              <div className="p-0 m-0 collapse collapse-arrow">
                 <input
                   type="checkbox"
-                  class="peer"
+                  className="peer"
                 />
-                <div class="collapse-title flex items-center">
+                <div className="flex items-center collapse-title">
                   <span className="flex items-center gap-2 font-bold">
                     <FaUsers />
                     Manage Users
                   </span>
                 </div>
-                <div class="collapse-content">
+                <div className="collapse-content">
                   <Link to="#">
                     <span className="flex items-center gap-2 px-2 text-sm hover:text-primary hover:font-semibold ">
                       <FaTable />
@@ -81,18 +81,18 @@ const SideContent = ({ pin, togglePin, toggleVisible, side, noOverlayEvent = fal
               </div>
             </Menu.Item>
             <Menu.Item>
-              <div class="collapse collapse-arrow p-0 m-0">
+              <div className="p-0 m-0 collapse collapse-arrow">
                 <input
                   type="checkbox"
-                  class="peer"
+                  className="peer"
                 />
-                <div class="collapse-title flex items-center">
+                <div className="flex items-center collapse-title">
                   <span className="flex items-center gap-2 font-bold">
                     <FaCartPlus />
                     Manage Orders
                   </span>
                 </div>
-                <div class="collapse-content">
+                <div className="collapse-content">
                   <Link to="#">
                     <span className="flex items-center gap-2 px-2 text-sm hover:text-primary hover:font-semibold ">
                       <FaTable />
@@ -115,18 +115,18 @@ const SideContent = ({ pin, togglePin, toggleVisible, side, noOverlayEvent = fal
               </div>
             </Menu.Item>
             <Menu.Item>
-              <div class="collapse collapse-arrow p-0 m-0">
+              <div className="p-0 m-0 collapse collapse-arrow">
                 <input
                   type="checkbox"
-                  class="peer"
+                  className="peer"
                 />
-                <div class="collapse-title flex items-center">
+                <div className="flex items-center collapse-title">
                   <span className="flex items-center gap-2 font-bold">
                     <FaBoxes />
                     Manage Products
                   </span>
                 </div>
-                <div class="collapse-content">
+                <div className="collapse-content">
                   <Link to="#">
                     <span className="flex items-center gap-2 px-2 text-sm hover:text-primary hover:font-semibold ">
                       <FaTable />

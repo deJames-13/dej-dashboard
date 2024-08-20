@@ -1,6 +1,6 @@
 import { Card } from 'react-daisyui';
 import { Link } from 'react-router-dom';
-import { LoginForm } from './AuthForm';
+import LoginForm from './LoginForm';
 
 function AuthLogin() {
   return (
