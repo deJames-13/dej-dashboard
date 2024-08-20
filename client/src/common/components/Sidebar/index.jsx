@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { Button, Drawer, Menu } from 'react-daisyui';
+import { Drawer } from 'react-daisyui';
 
 function Sidebar({ children, ...props }) {
   return <Drawer {...props}>{children}</Drawer>;

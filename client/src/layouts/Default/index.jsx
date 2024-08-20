@@ -1,4 +1,3 @@
-import { useCheckAuth } from '@custom';
 import { FooterWrapper, Header } from '@partials';
 import { Outlet } from 'react-router-dom';
 

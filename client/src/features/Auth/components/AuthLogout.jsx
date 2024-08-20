@@ -1,5 +1,4 @@
 import { useCheckAuth, useLogout } from '@custom';
-import React from 'react';
 import { Button } from 'react-daisyui';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
 

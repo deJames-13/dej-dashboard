@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+/* eslint-disable no-undef */
 
 export const connectDB = async (uri, success = () => {}, error = () => []) => {
   if (!uri || typeof uri !== 'string') {
