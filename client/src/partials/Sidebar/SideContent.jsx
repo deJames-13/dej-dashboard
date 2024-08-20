@@ -6,7 +6,7 @@ import { BsPinAngleFill } from 'react-icons/bs';
 import { FaHome, FaTable, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const SideContent = ({ pin, togglePin, toggleVisible, side, noOverlayEvent = false, noOverlay = false }) => {
+const SideContent = ({ pin, togglePin, toggleVisible, noOverlayEvent = false, noOverlay = false }) => {
   return (
     <>
       {!pin && (
@@ -82,7 +82,6 @@ const SideContent = ({ pin, togglePin, toggleVisible, side, noOverlayEvent = fal
             </Menu.Item>
           </Menu>
 
-          {side}
           <div className="mt-auto">
             <div className="divider"></div>
             <div className="p-4 ">
@@ -103,7 +102,6 @@ SideContent.propTypes = {
   pin: PropTypes.bool,
   togglePin: PropTypes.func,
   toggleVisible: PropTypes.func,
-  side: PropTypes.node,
   noOverlayEvent: PropTypes.bool,
   noOverlay: PropTypes.bool,
 };
