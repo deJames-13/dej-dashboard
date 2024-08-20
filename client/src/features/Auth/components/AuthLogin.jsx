@@ -18,7 +18,7 @@ function AuthLogin() {
 
           <div className="divider">or</div>
           <div className="flex justify-center gap-2">
-            Doesn't have an account?
+            Doesn&apos;t have an account?
             <Link
               to="/signup"
               className="link link-secondary"

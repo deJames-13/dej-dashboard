@@ -10,4 +10,4 @@ export const protect = (store) => (next) => (action) => {
   return next(action);
 };
 
-export const checkPermission = (store) => (next) => (action) => {};
+// export const checkPermission = (store) => (next) => (action) => {};

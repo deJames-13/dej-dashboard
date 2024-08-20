@@ -6,6 +6,7 @@ function FormInput({ label, refer, meta, ...inputProps }) {
       <label className={`${meta?.touched && meta?.error ? 'text-error' : 'text-base-content'}`}>{label}</label>
       <input
         className={`input input-bordered ${meta?.touched && meta?.error ? 'input-error' : 'input-primary'} w-full`}
+        ref={refer}
         {...inputProps}
       />
       {meta?.touched && meta?.error && <div className="text-xs italic text-error">{meta?.error}</div>}

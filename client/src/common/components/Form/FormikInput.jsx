@@ -30,6 +30,7 @@ function FormikInput({ label, variant, ...props }) {
 
 FormikInput.propTypes = {
   label: PropTypes.string,
+  variant: PropTypes.string,
 };
 
 export default FormikInput;

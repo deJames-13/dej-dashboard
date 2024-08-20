@@ -1,7 +1,8 @@
 import { TextRainbow, ThemeToggler } from '@common/components';
 import { AuthLogout } from '@features';
-import { Button, Dropdown, Navbar } from 'react-daisyui';
-import { FaBars, FaGithubAlt } from 'react-icons/fa';
+import { PropTypes } from 'prop-types';
+import { Dropdown, Navbar } from 'react-daisyui';
+import { FaBars } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const MenuList = () => {
@@ -59,5 +60,9 @@ function Header({ clickLogo }) {
     </>
   );
 }
+
+Header.propTypes = {
+  clickLogo: PropTypes.func,
+};
 
 export default Header;

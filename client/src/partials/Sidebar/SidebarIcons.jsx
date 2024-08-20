@@ -2,18 +2,8 @@ import { useToggle } from '@common';
 import { Sidebar as SidebarComponent } from '@common/components';
 import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
-import { Button, Dropdown, Menu } from 'react-daisyui';
-import {
-  FaAngleRight,
-  FaArrowAltCircleRight,
-  FaBoxes,
-  FaCartPlus,
-  FaHome,
-  FaTable,
-  FaTimes,
-  FaUsers,
-} from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Dropdown } from 'react-daisyui';
+import { FaAngleRight, FaBoxes, FaCartPlus, FaHome, FaUsers } from 'react-icons/fa';
 
 const SideContent = ({ side }) => {
   return (
@@ -37,7 +27,7 @@ const SideContent = ({ side }) => {
               </span>
             </Dropdown.Details.Toggle>
             <Dropdown.Menu className="absulute w-52 z-[100!important]">
-              <Dropdown.Item>Item 1</Dropdown.Item>import {AuthLogout} from '@features';
+              <Dropdown.Item>Item 1</Dropdown.Item>
               <Dropdown.Item>Item 2</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown.Details>
@@ -67,9 +57,11 @@ SideContent.propTypes = {
   togglePin: PropTypes.func,
   toggleVisible: PropTypes.func,
   side: PropTypes.node,
+  noOverlayEvent: PropTypes.bool,
+  noOverlay: PropTypes.bool,
 };
 
-function SidebarIcons({ children, visible, toggleVisible, side, ...props }) {
+function SidebarIcons({ children, toggleVisible, side, ...props }) {
   const [pin, togglePin] = useToggle(false);
   const { noOverlayEvent, noOverlay } = props;
   const sideProps = { pin, togglePin, toggleVisible, side, noOverlayEvent, noOverlay };
@@ -94,6 +86,9 @@ SidebarIcons.propTypes = {
   children: PropTypes.node,
   visible: PropTypes.bool,
   toggleVisible: PropTypes.func,
+  noOverlayEvent: PropTypes.bool,
+  noOverlay: PropTypes.bool,
+  side: PropTypes.node,
 };
 
 export default SidebarIcons;

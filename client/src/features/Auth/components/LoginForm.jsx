@@ -19,12 +19,12 @@ const loginFormik = {
   validationSchema: loginValidation,
 };
 
-export default () => {
+function LoginForm() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [login, { isLoading }] = authApi.useLoginMutation();
 
-  const handleLogin = async (values, actions) => {
+  const handleLogin = async (values) => {
     try {
       const res = await login(values).unwrap();
       dispatch(setCredentials(res.user));
@@ -43,7 +43,7 @@ export default () => {
           <Button
             variant="outline"
             color="primary"
-            disabled={isSubmitting}
+            disabled={isSubmitting || isLoading}
             type="submit"
           >
             Log In
@@ -52,4 +52,5 @@ export default () => {
       }}
     />
   );
-};
+}
+export default LoginForm;

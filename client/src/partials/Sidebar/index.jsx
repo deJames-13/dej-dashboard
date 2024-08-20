@@ -2,9 +2,9 @@ import { useToggle } from '@common';
 import { Sidebar as SidebarComponent, TextRainbow } from '@common/components';
 import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
-import { Button, Menu } from 'react-daisyui';
+import { Menu } from 'react-daisyui';
 import { BsPinAngleFill } from 'react-icons/bs';
-import { FaArrowAltCircleRight, FaBoxes, FaCartPlus, FaHome, FaTable, FaUsers } from 'react-icons/fa';
+import { FaBoxes, FaCartPlus, FaHome, FaTable, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const SideContent = ({ pin, togglePin, toggleVisible, side, noOverlayEvent = false, noOverlay = false }) => {
@@ -173,6 +173,8 @@ SideContent.propTypes = {
   togglePin: PropTypes.func,
   toggleVisible: PropTypes.func,
   side: PropTypes.node,
+  noOverlayEvent: PropTypes.bool,
+  noOverlay: PropTypes.bool,
 };
 
 function Sidebar({ children, visible, toggleVisible, side, ...props }) {
@@ -200,7 +202,11 @@ Sidebar.propTypes = {
   children: PropTypes.node,
   visible: PropTypes.bool,
   toggleVisible: PropTypes.func,
+  side: PropTypes.node,
+  noOverlayEvent: PropTypes.bool,
+  noOverlay: PropTypes.bool,
 };
 
 export default Sidebar;
 export { default as SidebarIcons } from './SidebarIcons';
+

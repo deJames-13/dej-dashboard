@@ -20,12 +20,12 @@ const signupFormik = {
   }, {}),
   validationSchema: signupValidation,
 };
-export default () => {
+function SignupFrom() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [register, { isLoading }] = authApi.useRegisterMutation();
 
-  const handleSignup = async (values, actions) => {
+  const handleSignup = async (values) => {
     try {
       const res = await register(values).unwrap();
       dispatch(setCredentials(res.user));
@@ -44,7 +44,7 @@ export default () => {
           <Button
             variant="outline"
             color="primary"
-            disabled={isSubmitting}
+            disabled={isSubmitting || isLoading}
           >
             Sign Up
           </Button>
@@ -52,4 +52,6 @@ export default () => {
       }}
     />
   );
-};
+}
+
+export default SignupFrom;

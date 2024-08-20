@@ -6,6 +6,7 @@ const propTypes = {
   type: PropTypes.string,
   theme: PropTypes.string,
   onToggle: PropTypes.func,
+  isLocalTheme: PropTypes.bool,
 };
 
 const IconsInToggler = ({ onToggle, isLocalTheme }) => {
@@ -154,7 +155,7 @@ function ThemeToggler({ type }) {
   }
 }
 
-ThemeToggler.propTypes = { type: propTypes.type };
+ThemeToggler.propTypes = propTypes;
 WithIcons.propTypes = propTypes;
 SwapToggler.propTypes = propTypes;
 IconsInToggler.propTypes = propTypes;
