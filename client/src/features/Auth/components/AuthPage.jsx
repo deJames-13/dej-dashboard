@@ -1,15 +1,19 @@
+import { useCheckAuth } from '@custom';
 import PropTypes from 'prop-types';
 import { Hero } from 'react-daisyui';
 import AuthLogin from './AuthLogin';
 import AuthSignup from './AuthSignup';
 
 function Auth({ page = 'login' }) {
+  const user = useCheckAuth();
   return (
-    <Hero className="container max-w-5xl">
-      <Hero.Content className="flex-col lg:flex-row-reverse">
-        {page === 'login' ? <AuthLogin /> : <AuthSignup />}
-      </Hero.Content>
-    </Hero>
+    !user?.id && (
+      <Hero className="container max-w-5xl">
+        <Hero.Content className="flex-col lg:flex-row-reverse">
+          {page === 'login' ? <AuthLogin /> : <AuthSignup />}
+        </Hero.Content>
+      </Hero>
+    )
   );
 }
 

@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 const useCheckAuth = (isPrivate = false) => {
   const { userInfo } = useSelector((state) => state.auth);
@@ -14,6 +14,6 @@ const useCheckAuth = (isPrivate = false) => {
     }
   }, [navigate, userInfo, isPrivate]);
 
-  return isPrivate ? userInfo : null;
+  return isPrivate || userInfo?.id ? userInfo : null;
 };
 export default useCheckAuth;
