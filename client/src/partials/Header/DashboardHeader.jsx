@@ -57,7 +57,11 @@ function DashboardHeader({ toggleVisible, visible }) {
             <MenuList />
           </div>
 
-          <Dropdown className=" md:hidden">
+          <Dropdown
+            className="md:hidden"
+            horizontal="left"
+            vertical="bottom"
+          >
             <Dropdown.Toggle>
               <FaBars />
             </Dropdown.Toggle>
