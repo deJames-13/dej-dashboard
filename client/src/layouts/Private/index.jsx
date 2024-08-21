@@ -19,7 +19,6 @@ function PrivateLayout() {
         toggleVisible={toggleVisible}
       >
         <div className="relative w-full">
-          <Header clickLogo={toggleVisible()} />
           <div className="container grid min-h-screen mx-auto place-items-center">
             <Outlet context={{ userInfo }} />
           </div>

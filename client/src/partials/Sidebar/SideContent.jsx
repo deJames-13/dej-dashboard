@@ -3,7 +3,7 @@ import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
 import { Menu } from 'react-daisyui';
 import { BsPinAngleFill } from 'react-icons/bs';
-import { FaHome, FaTable, FaUsers } from 'react-icons/fa';
+import { FaArrowAltCircleLeft, FaHome, FaTable, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const SideContent = (props) => {
@@ -21,7 +21,7 @@ const SideContent = (props) => {
       )}
       <div className="relative flex flex-col w-full h-full overflow-visible">
         <div className="flex items-center w-full gap-2 p-2 bg-base-200">
-          <div className="flex-grow ">
+          <div className="flex items-center flex-grow gap-2">
             <TextRainbow
               text="Dashboard"
               className="text-lg font-extrabold btn btn-ghost"
@@ -35,6 +35,12 @@ const SideContent = (props) => {
           >
             <BsPinAngleFill />
           </button>
+          <Link
+            to="/home"
+            className="btn btn-primary btn-outline"
+          >
+            <FaArrowAltCircleLeft />
+          </Link>
         </div>
         <div className="flex flex-col flex-grow bg-base-200">
           <div className="divider"></div>
