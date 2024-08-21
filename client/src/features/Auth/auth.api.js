@@ -2,6 +2,13 @@ import { apiSlice } from '@app/config';
 
 export const authApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
+    profile: build.mutation({
+      query: (body) => ({
+        url: '/users/profile',
+        method: 'GET',
+        body,
+      }),
+    }),
     login: build.mutation({
       query: (body) => ({
         url: '/users/authenticate',

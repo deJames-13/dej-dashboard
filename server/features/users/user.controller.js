@@ -1,5 +1,5 @@
 import { Controller } from '#lib';
-import { Errors, tokenExists } from '#utils';
+import { Errors, getBearerToken, tokenExists } from '#utils';
 import UserResource from './user.resource.js';
 import UserService from './user.service.js';
 import { userCreateRules, userUpdateRules } from './user.validation.js';
@@ -72,7 +72,6 @@ class UserController extends Controller {
   // @access  Public
   logout = async (req, res) => {
     const token = await this.service.logout();
-
     res.cookie(...token);
     this.success({ res, message: 'Logged out!' });
   };
@@ -89,6 +88,7 @@ class UserController extends Controller {
       res,
       message: 'Profile fetch successfully!',
       user: this.resource.make(user),
+      token: getBearerToken(req),
     });
   };
 
@@ -99,11 +99,11 @@ class UserController extends Controller {
     const validData = await this.validator(req, res, this.rules.update);
     const user = await this.service.updateUser(req.user._id, validData);
     if (!user) throw new Errors.BadRequest('Invalid user data!');
-
     this.success({
       res,
       message: 'Profile updated!',
       user: this.resource.make(user),
+      token: getBearerToken(req),
     });
   };
 }
