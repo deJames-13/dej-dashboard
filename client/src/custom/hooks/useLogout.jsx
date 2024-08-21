@@ -16,6 +16,7 @@ const useLogout = () => {
       navigate('/login');
       toast.success('Logged out successfully');
     } catch (error) {
+      if ([401, 403].includes(error?.status)) return toast.error('Logged out due to unauthorized access');
       toast.error(error?.data?.message || 'Logout failed');
     }
   };

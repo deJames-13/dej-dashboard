@@ -15,7 +15,7 @@ export default [
     controller: controller.getALl,
   },
   {
-    path: '/register',
+    path: '/',
     method: METHODS.POST,
     controller: controller.register,
   },
