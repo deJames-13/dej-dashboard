@@ -2,7 +2,7 @@ import { authApi, setCredentials } from '@features';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import useLogout from './useLogout';
+import { useLogoutAction } from './useLogout';
 
 export const useGetAuth = () => {
   const { userInfo, accessToken } = useSelector((state) => state.auth);
@@ -14,7 +14,7 @@ const useCheckAuth = (isPrivate = false) => {
   const [profile] = authApi.useProfileMutation();
   const { userInfo, accessToken } = useSelector((state) => state.auth);
   const [user, setUser] = useState(userInfo);
-  const logout = useLogout();
+  const logout = useLogoutAction();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const useCheckAuth = (isPrivate = false) => {
   }, [accessToken, dispatch, profile, user]);
 
   useEffect(() => {
-    if (!accessToken && user?.id) {
+    if (!accessToken && userInfo) {
       logout();
       return navigate('/');
     }
@@ -41,7 +41,7 @@ const useCheckAuth = (isPrivate = false) => {
     } else if (!user?.id && isPrivate) {
       return navigate('/login');
     }
-  }, [navigate, user, isPrivate, accessToken, logout]);
+  }, [navigate, user, isPrivate, userInfo, accessToken, logout]);
 
   return isPrivate || user?.id ? user : null;
 };
