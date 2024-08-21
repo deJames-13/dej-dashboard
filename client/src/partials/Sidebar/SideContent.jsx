@@ -1,10 +1,10 @@
 import { TextRainbow } from '@common/components';
 import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
-import { Menu } from 'react-daisyui';
 import { BsPinAngleFill } from 'react-icons/bs';
-import { FaHome, FaTable, FaUsers } from 'react-icons/fa';
+import { FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import SidebarMenu from './SidebarMenu';
 
 const SideContent = (props) => {
   const { pin, togglePin, toggleVisible, ...overlayProps } = props;
@@ -28,7 +28,6 @@ const SideContent = (props) => {
               onClick={toggleVisible()}
             />
           </div>
-
           <button
             className={`hidden 2xl:flex btn btn-primary ${pin ? 'ml-auto' : 'btn-outline'}`}
             onClick={togglePin()}
@@ -41,54 +40,13 @@ const SideContent = (props) => {
             </button>
           </Link>
         </div>
+
         <div className="flex flex-col flex-grow bg-base-200">
           <div className="divider"></div>
 
-          <Menu>
-            <Menu.Item>
-              <Link to="#">
-                <span className="flex items-center gap-2 font-bold ">
-                  <FaHome />
-                  Home
-                </span>
-              </Link>
-            </Menu.Item>
-            <Menu.Item>
-              <div className="p-0 m-0 collapse collapse-arrow">
-                <input
-                  type="checkbox"
-                  className="peer"
-                />
-                <div className="flex items-center collapse-title">
-                  <span className="flex items-center gap-2 font-bold">
-                    <FaUsers />
-                    Manage Users
-                  </span>
-                </div>
-                <div className="collapse-content">
-                  <Link to="#">
-                    <span className="flex items-center gap-2 px-2 text-sm hover:text-primary hover:font-semibold ">
-                      <FaTable />
-                      Table
-                    </span>
-                  </Link>
-                  <Link to="#">
-                    <span className="flex items-center gap-2 px-2 text-sm hover:text-primary hover:font-semibold ">
-                      <FaTable />
-                      List
-                    </span>
-                  </Link>
-                  <Link to="#">
-                    <span className="flex items-center gap-2 px-2 text-sm hover:text-primary hover:font-semibold ">
-                      <FaTable />
-                      Charts
-                    </span>
-                  </Link>
-                </div>
-              </div>
-            </Menu.Item>
-          </Menu>
-
+          <div className="flex-grow overflow-y-auto scrollbar-none">
+            <SidebarMenu />
+          </div>
           <div className="mt-auto">
             <div className="divider"></div>
             <div className="p-4 ">

@@ -41,4 +41,3 @@ Sidebar.propTypes = {
 };
 
 export default Sidebar;
-export { default as SidebarIcons } from './SidebarIcons';
