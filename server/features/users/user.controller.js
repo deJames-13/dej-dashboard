@@ -12,6 +12,21 @@ class UserController extends Controller {
     update: userUpdateRules,
   };
 
+  // @desc    Get a refreshed token from current user
+  // route    GET /api/users/refresh
+  // @access  Public
+  refresh = async (req, res) => {
+    if (!req.user?._id) throw new Errors.Unauthorized('Invalid credentials!');
+    const token = await this.service.refreshToken(req.user._id);
+    res.cookie(...token);
+    this.success({
+      res,
+      message: 'Token refreshed!',
+      user: this.resource.make(req.user),
+      token: token[1],
+    });
+  };
+
   // @desc    Register a new user
   // route    POST /api/users
   // @access  Public
@@ -28,6 +43,7 @@ class UserController extends Controller {
       res,
       message: 'Registered!',
       user: this.resource.make(user),
+      token: token[1],
     });
   };
 
@@ -47,6 +63,7 @@ class UserController extends Controller {
       res,
       message: 'Authenticated!',
       user: this.resource.make(user),
+      token: token[1],
     });
   };
 

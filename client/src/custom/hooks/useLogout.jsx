@@ -1,4 +1,4 @@
-import { authApi, setCredentials } from '@features';
+import { authApi, logout as logoutAction } from '@features';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -12,8 +12,8 @@ const useLogout = () => {
 
     try {
       await logout().unwrap();
-      dispatch(setCredentials(null));
-      navigate('/');
+      dispatch(logoutAction());
+      navigate('/login');
       toast.success('Logged out successfully');
     } catch (error) {
       toast.error(error?.data?.message || 'Logout failed');

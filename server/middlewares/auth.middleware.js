@@ -6,21 +6,21 @@ export const protect = async (req, res, next) => {
   let token = req.cookies.jwt || req.cookies[UserService.authToken];
   // let token =  getBearerToken(req) ; for Authorization: Bearer token
 
-  if (!token) throw new Errors.AuthorizationError();
+  if (!token) throw new Errors.Unauthorized();
   try {
     const decoded = verifyToken(token);
     req.user = await UserService.getById(decoded.userId);
 
     next();
   } catch (e) {
-    throw new Errors.AuthorizationError({ details: e.message });
+    throw new Errors.Unauthorized({ details: e.message });
   }
 };
 
 export const checkPermissions = (permissions = []) => {
   return (req, res, next) => {
     const user = req.user;
-    if (!user) throw new Errors.AuthorizationError();
+    if (!user) throw new Errors.Unauthorized();
 
     const userRole = user?.role;
     const userPermissions = user?.permissions || PRIVILEGES[userRole] || [];

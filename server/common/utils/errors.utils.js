@@ -23,7 +23,7 @@ export class AppError extends Error {
 }
 
 const errorSchema = [
-  { name: 'AuthorizationError', message: 'Unauthorized.', statusCode: 401 },
+  { name: 'Unauthorized', message: 'Unauthorized.', statusCode: 401 },
   { name: 'Forbidden', message: 'Forbidden.', statusCode: 403 },
   { name: 'NotFound', message: 'Resource not found.', statusCode: 404 },
   { name: 'Conflict', message: 'Resource already exists.', statusCode: 409 },

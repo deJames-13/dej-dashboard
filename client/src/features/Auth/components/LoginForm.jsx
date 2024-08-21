@@ -27,7 +27,12 @@ function LoginForm() {
   const handleLogin = async (values) => {
     try {
       const res = await login(values).unwrap();
-      dispatch(setCredentials(res.user));
+      dispatch(
+        setCredentials({
+          userInfo: res.user,
+          token: res.token,
+        })
+      );
       navigate('/dashboard');
       toast.success('Logged in successfully');
     } catch (e) {

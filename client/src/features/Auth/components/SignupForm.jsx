@@ -28,7 +28,12 @@ function SignupFrom() {
   const handleSignup = async (values) => {
     try {
       const res = await register(values).unwrap();
-      dispatch(setCredentials(res.user));
+      dispatch(
+        setCredentials({
+          userInfo: res.user,
+          token: res.token,
+        })
+      );
       navigate('/dashboard');
       toast.success('Signup successfully');
     } catch (e) {

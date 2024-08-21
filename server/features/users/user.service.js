@@ -6,6 +6,11 @@ class UserService extends Service {
   model = UserModel;
   authToken = 'jwt';
 
+  async refreshToken(userId) {
+    const token = generateToken(userId, this.authToken);
+    return token;
+  }
+
   async registerUser(body) {
     const userExists = await this.checkIfExists({ email: body.email });
     if (userExists)

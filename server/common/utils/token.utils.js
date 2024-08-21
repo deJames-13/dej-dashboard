@@ -15,6 +15,8 @@ const defaultCookieOptions = {
  * @returns {boolean} - True if the token exists, false otherwise.
  */
 const tokenExists = (req, tokenName) => {
+  if (!req.user) return false;
+
   return req.cookies[tokenName] ? true : false;
 };
 

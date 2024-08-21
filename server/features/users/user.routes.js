@@ -1,41 +1,46 @@
-import { METHODS, PATHS, READ_WRITE } from '#constants';
+import { METHODS, READ_WRITE } from '#constants';
 import { protectAndPermit } from '#middlewares/auth.middleware';
 import UserController from './user.controller.js';
 
 const controller = UserController;
 export default [
   {
-    path: PATHS.ALL,
+    path: '/refresh',
+    method: METHODS.GET,
+    controller: controller.refresh,
+  },
+  {
+    path: '/',
     method: METHODS.GET,
     controller: controller.getALl,
   },
   {
-    path: PATHS.STORE,
+    path: '/register',
     method: METHODS.POST,
     controller: controller.register,
   },
   {
-    path: PATHS.AUTHENTICATE,
+    path: '/authenticate',
     method: METHODS.POST,
     controller: controller.authenticate,
   },
   {
-    path: PATHS.LOGOUT,
+    path: '/logout',
     method: METHODS.POST,
     controller: [protectAndPermit(), controller.logout],
   },
   {
-    path: PATHS.PROFILE,
+    path: '/profile',
     method: METHODS.GET,
     controller: [protectAndPermit(), controller.getProfile],
   },
   {
-    path: PATHS.PROFILE,
+    path: '/profile',
     method: METHODS.PATCH,
     controller: [protectAndPermit(READ_WRITE), controller.updateProfile],
   },
   {
-    path: PATHS.ID,
+    path: '/:id',
     method: METHODS.GET,
     controller: controller.getById,
   },
