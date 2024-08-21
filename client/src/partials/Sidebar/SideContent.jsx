@@ -3,7 +3,7 @@ import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
 import { Menu } from 'react-daisyui';
 import { BsPinAngleFill } from 'react-icons/bs';
-import { FaArrowAltCircleLeft, FaHome, FaTable, FaUsers } from 'react-icons/fa';
+import { FaHome, FaTable, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
 const SideContent = (props) => {
@@ -35,11 +35,10 @@ const SideContent = (props) => {
           >
             <BsPinAngleFill />
           </button>
-          <Link
-            to="/home"
-            className="btn btn-primary btn-outline"
-          >
-            <FaArrowAltCircleLeft />
+          <Link to="/home">
+            <button className="transition-all btn btn-primary btn-outline">
+              <FaHome />
+            </button>
           </Link>
         </div>
         <div className="flex flex-col flex-grow bg-base-200">

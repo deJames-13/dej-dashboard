@@ -66,3 +66,4 @@ Header.propTypes = {
 };
 
 export default Header;
+export { default as DashboardHeader } from './DashboardHeader';

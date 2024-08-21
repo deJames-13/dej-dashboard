@@ -1,4 +1,5 @@
 import router from '@app/routes';
+import 'animate.css';
 import React from 'react';
 import { RouterProvider } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';

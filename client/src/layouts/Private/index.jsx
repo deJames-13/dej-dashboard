@@ -1,6 +1,6 @@
 import { useToggle } from '@common';
 import { useCheckAuth } from '@custom';
-import { FooterWrapper, Header, Sidebar } from '@partials';
+import { DashboardHeader, FooterWrapper, Sidebar } from '@partials';
 import { Outlet } from 'react-router-dom';
 
 function PrivateLayout() {
@@ -9,23 +9,29 @@ function PrivateLayout() {
     name: 'Private User',
   };
   return (
-    <div
-      id="private-layout"
-      className="flex w-screen h-screen overflow-y-auto "
-    >
-      <Sidebar
-        visible={visible}
-        noOverlay={true}
-        toggleVisible={toggleVisible}
+    userInfo?.id && (
+      <div
+        id="private-layout"
+        className="flex w-screen h-screen overflow-y-auto "
       >
-        <div className="relative w-full">
-          <div className="container grid min-h-screen mx-auto place-items-center">
-            <Outlet context={{ userInfo }} />
+        <Sidebar
+          visible={visible}
+          noOverlay={true}
+          toggleVisible={toggleVisible}
+        >
+          <DashboardHeader
+            toggleVisible={toggleVisible}
+            visible={!visible}
+          />
+          <div className="relative w-full">
+            <div className="container grid min-h-screen mx-auto place-items-center">
+              <Outlet context={{ userInfo }} />
+            </div>
+            <FooterWrapper />
           </div>
-          <FooterWrapper />
-        </div>
-      </Sidebar>
-    </div>
+        </Sidebar>
+      </div>
+    )
   );
 }
 
