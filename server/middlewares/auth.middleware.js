@@ -4,7 +4,10 @@ import { Errors, getBearerToken, verifyToken } from '#utils';
 
 export const protect = async (req, res, next) => {
   // let token = req.cookies.jwt || req.cookies[UserService.authToken];
-  let token = getBearerToken(req); // for Authorization: Bearer token
+  let token =
+    getBearerToken(req) ||
+    req.cookies.jwt ||
+    req.cookies[UserService.authToken]; // for Authorization: Bearer token
 
   if (!token) throw new Errors.Unauthorized();
   try {

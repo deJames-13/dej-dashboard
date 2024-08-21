@@ -1,10 +1,10 @@
-import { useCheckAuth, useLogout } from '@custom';
+import { useGetAuth, useLogout } from '@custom';
 import { Button } from 'react-daisyui';
 import { FaArrowRightFromBracket } from 'react-icons/fa6';
 
 export default function AuthLogout(buttonProps) {
   const handleLogout = useLogout();
-  const userInfo = useCheckAuth(true);
+  const { userInfo } = useGetAuth();
   return (
     userInfo && (
       <form onSubmit={handleLogout}>

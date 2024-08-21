@@ -4,7 +4,7 @@ const userInfo = window.localStorage.getItem('userInfo');
 const accessToken = window.localStorage.getItem('accessToken');
 const initialState = {
   userInfo: userInfo ? JSON.parse(userInfo) : null,
-  accessToken: accessToken ? JSON.parse(accessToken) : null,
+  accessToken: accessToken || null,
 };
 
 export const authSlice = createSlice({
@@ -22,6 +22,7 @@ export const authSlice = createSlice({
       state.userInfo = null;
       state.accessToken = null;
       localStorage.removeItem('userInfo');
+      localStorage.removeItem('accessToken');
     },
   },
 });
