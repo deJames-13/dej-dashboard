@@ -36,9 +36,9 @@ const baseQueryWithReAuth = async (args, api, extraOptions) => {
     api.dispatch(setCredentials({ userInfo, token }));
 
     return await baseQuery(args, api, extraOptions);
+  } else {
+    api.dispatch(logout());
   }
-  api.dispatch(logout());
-  return result;
 };
 
 export const apiSlice = createApi({

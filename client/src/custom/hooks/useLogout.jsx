@@ -4,27 +4,27 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-const useLogoutAction = () => {
+export const useLogoutAction = () => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
   const [logout] = authApi.useLogoutMutation();
 
   const action = useCallback(async () => {
     await logout().unwrap();
     dispatch(logoutAction());
-    navigate('/login');
-  }, [dispatch, navigate, logout]);
+  }, [dispatch, logout]);
 
   return action;
 };
 
 const useLogout = () => {
   const logout = useLogoutAction();
+  const navigate = useNavigate();
   const handleLogout = useCallback(
     async (e) => {
       e?.preventDefault();
       try {
         await logout();
+        navigate('/login');
         toast.success('Logged out successfully');
       } catch (error) {
         if ([401, 403].includes(error?.status)) return toast.error('Logged out due to unauthorized access');
