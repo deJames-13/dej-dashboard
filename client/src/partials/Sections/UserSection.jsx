@@ -6,10 +6,10 @@ import { Link } from 'react-router-dom';
 function UserSection({ user }) {
   return (
     <Hero>
-      <Hero.Content className="text-center">
-        <div className="max-w-md">
-          <h3 className="text-4xl font-semibold">Welcome,</h3>
-          <h1 className="text-5xl font-bold">
+      <Hero.Content className="text-left">
+        <div className="max-w-5xl">
+          <h1 className="font-semibold text-8xl">Welcome,</h1>
+          <h1 className="font-bold text-7xl">
             <TextRainbow text={user?.username || 'Private User'} />
           </h1>
           <p className="py-6">

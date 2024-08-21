@@ -12,9 +12,9 @@ function Sidebar(props) {
     <SidebarComponent
       open={visible || pin}
       onClickOverlay={toggleVisible(pin)}
-      sideClassName={`z-[70] w-60 md:min-w-60 md:w-80 md:max-w-xs  ${pinned} `}
-      className="sticky flex-row-reverse max-h-screen overflow-auto 2xl:flex"
-      contentClassName="scrollbar-thin 2xl:w-full 2xl:max-h-screen overflow-y-auto transition-all ease-in-out"
+      sideClassName={`scrollbar-none z-[70] w-60 md:min-w-60 md:w-80 md:max-w-xs  ${pinned} `}
+      className="sticky flex-row-reverse max-h-screen overflow-auto scrollbar-none 2xl:flex"
+      contentClassName="scrollbar-none 2xl:w-full 2xl:max-h-screen overflow-y-auto transition-all ease-in-out px-[0px!important]"
       overlayClassName="w-0"
       side={
         <SideContent

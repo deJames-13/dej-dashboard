@@ -24,7 +24,15 @@
 ::-webkit-scrollbar {
   scrollbar-width: thin;
 }
+.scrollbar-none,
+::-webkit-scrollbar {
+  scrollbar-width: none;
+}
 
 .scrollbar-hidden {
   scrollbar-width: none;
+}
+
+.drawer-content {
+  padding-inline: 0px !important;
 }
