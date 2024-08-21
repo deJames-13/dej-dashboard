@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 const useCheckAuth = (isPrivate = false) => {
-  const { userInfo } = useSelector((state) => state.auth.userInfo);
+  const userInfo = useSelector((state) => state.auth.userInfo);
   const navigate = useNavigate();
 
   useEffect(() => {
