@@ -6,7 +6,9 @@ import { BsPinAngleFill } from 'react-icons/bs';
 import { FaHome, FaTable, FaUsers } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 
-const SideContent = ({ pin, togglePin, toggleVisible, noOverlayEvent = false, noOverlay = false }) => {
+const SideContent = (props) => {
+  const { pin, togglePin, toggleVisible, ...overlayProps } = props;
+  const { noOverlay, noOverlayEvent } = overlayProps;
   return (
     <>
       {!pin && (

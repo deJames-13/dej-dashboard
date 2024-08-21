@@ -4,7 +4,7 @@ import { FooterWrapper, Header, Sidebar } from '@partials';
 import { Outlet } from 'react-router-dom';
 
 function PrivateLayout() {
-  const [visible, toggleVisible] = useToggle(false);
+  const [visible, toggleVisible] = useToggle(true);
   const userInfo = useCheckAuth(true) || {
     name: 'Private User',
   };
@@ -15,6 +15,7 @@ function PrivateLayout() {
     >
       <Sidebar
         visible={visible}
+        noOverlay={true}
         toggleVisible={toggleVisible}
       >
         <div className="relative w-full">
