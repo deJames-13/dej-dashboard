@@ -1,8 +1,9 @@
 import { TextRainbow } from '@common/components';
 import { AuthLogout } from '@features';
 import PropTypes from 'prop-types';
+import { Button } from 'react-daisyui';
 import { BsPinAngleFill } from 'react-icons/bs';
-import { FaHome } from 'react-icons/fa';
+import { FaArrowAltCircleLeft, FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import SidebarMenu from './SidebarMenu';
 
@@ -20,13 +21,18 @@ const SideContent = (props) => {
         ></div>
       )}
       <div className="relative flex flex-col w-full h-full overflow-visible">
-        <div className="flex items-center w-full gap-2 p-2 bg-base-200">
+        <div className="flex items-center w-full gap-2 p-2 py-7 border-b border-gray-500 border-opacity-50 bg-base-200">
           <div className="flex items-center flex-grow gap-2">
-            <TextRainbow
-              text="Dashboard"
-              className="text-lg font-extrabold btn btn-ghost"
+            <Button
+              color="ghost"
               onClick={toggleVisible()}
-            />
+            >
+              <FaArrowAltCircleLeft />
+              <TextRainbow
+                text="Dashboard"
+                className="text-xl font-extrabold"
+              />
+            </Button>
           </div>
           <button
             className={`hidden 2xl:flex btn btn-primary ${pin ? 'ml-auto' : 'btn-outline'}`}
@@ -42,8 +48,6 @@ const SideContent = (props) => {
         </div>
 
         <div className="flex flex-col flex-grow bg-base-200">
-          <div className="divider"></div>
-
           <div className="flex-grow overflow-y-auto scrollbar-none">
             <SidebarMenu />
           </div>

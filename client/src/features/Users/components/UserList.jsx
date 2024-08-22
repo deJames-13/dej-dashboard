@@ -1,7 +1,13 @@
-import PropTypes from 'prop-types';
+import { PageTitle } from '@partials';
 
-function UserList(props) {
-  return <div>UserList</div>;
+function UserList() {
+  return (
+    <>
+      <div className="border border-red-400 w-full h-full">
+        <PageTitle title="Users Lists" />
+      </div>
+    </>
+  );
 }
 
 UserList.propTypes = {};

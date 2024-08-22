@@ -1,9 +1,11 @@
-import PropTypes from 'prop-types';
+import { PageTitle } from '@partials';
 
-function UserPage(props) {
-  return <div>UserPage</div>;
+function UserPage() {
+  return (
+    <div className=" w-full h-full">
+      <PageTitle title="Manage Users " />
+    </div>
+  );
 }
-
-UserPage.propTypes = {};
 
 export default UserPage;

@@ -1,9 +1,11 @@
-import PropTypes from 'prop-types';
+import { PageTitle } from '@partials';
 
-function UserTable(props) {
-  return <div>UserTable</div>;
+function UserTable() {
+  return (
+    <div className=" w-full h-full">
+      <PageTitle title="Users Table " />
+    </div>
+  );
 }
-
-UserTable.propTypes = {};
 
 export default UserTable;

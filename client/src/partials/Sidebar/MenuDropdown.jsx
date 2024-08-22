@@ -14,20 +14,21 @@ const MenuDropdown = ({ to, label, icon, contentMap, ...props }) => {
         type="checkbox"
         className="peer"
       />
-      <div className="flex items-center gap-2 collapse-title ">
+      <div className="flex items-center gap-2 collapse-title py-0">
         {icon}
         {label}
       </div>
-      <div className="collapse-content">
+      <div className="collapse-content py-0">
         {contentMap.map((item, index) =>
           item?.to || item?.label ? (
-            <MenuLink
-              key={index}
-              to={item.to || '#'}
-              icon={item?.icon || ''}
-              label={item.label}
-              className="px-2"
-            />
+            <span key={index}>
+              <MenuLink
+                to={item.to || '#'}
+                icon={item?.icon || ''}
+                label={item.label}
+                addClass="px-2"
+              />
+            </span>
           ) : (
             ''
           )

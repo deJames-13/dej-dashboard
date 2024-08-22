@@ -1,9 +1,13 @@
-import PropTypes from 'prop-types';
+import { PageTitle } from '@partials';
 
-function UserForm(props) {
-  return <div>UserForm</div>;
+function UserForm() {
+  return (
+    <>
+      <div className="border border-red-400 w-full h-full">
+        <PageTitle title="Users Form" />
+      </div>
+    </>
+  );
 }
-
-UserForm.propTypes = {};
 
 export default UserForm;

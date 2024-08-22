@@ -31,25 +31,19 @@ const MenuList = () => {
 function DashboardHeader({ toggleVisible, visible }) {
   return (
     <>
-      <Navbar
-        className={`fixed z-[10001] top-0 w-screen bg-base-200 animate__animated ${
-          !visible ? 'animate__fadeOutUp' : 'animate__fadeInDown'
-        }`}
-      >
+      <Navbar className={`w-screen bg-base-200 ${!visible ? 'hidden' : ''}`}>
         <Navbar.Start>
           <Button
-            color="primary"
-            variant="outline"
+            color="ghost"
             onClick={toggleVisible()}
           >
             <FaArrowAltCircleRight />
+            <TextRainbow
+              text="ACME"
+              className="text-xl font-extrabold"
+            />
           </Button>
 
-          <TextRainbow
-            text="ACME"
-            className="text-xl font-extrabold btn btn-ghost"
-            onClick={toggleVisible()}
-          />
           <ThemeToggler />
         </Navbar.Start>
         <Navbar.End>

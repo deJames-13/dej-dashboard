@@ -6,7 +6,7 @@ import MenuLink from './MenuLink';
 const menuList = [
   {
     type: 'link',
-    to: '#',
+    to: '/dashboard',
     icon: <FaHome />,
     label: 'Home',
   },
@@ -16,9 +16,9 @@ const menuList = [
     icon: <FaTable />,
     label: 'Manage Users',
     contentMap: [
-      { to: '#', label: 'Users Table', icon: <FaTable /> },
-      { to: '#', label: 'Users List', icon: <FaUsers /> },
-      { to: '#', label: 'Users Charts', icon: <FaTable /> },
+      { to: '/dashboard/users/table', label: 'Users Table', icon: <FaTable /> },
+      { to: '/dashboard/users/list', label: 'Users List', icon: <FaUsers /> },
+      { to: '/dashboard/users/form', label: 'Users Form', icon: <FaTable /> },
     ],
   },
 ];
