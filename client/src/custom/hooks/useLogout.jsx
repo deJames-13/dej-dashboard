@@ -31,7 +31,7 @@ const useLogout = () => {
         toast.error(error?.data?.message || 'Logout failed');
       }
     },
-    [logout]
+    [logout, navigate]
   );
 
   return handleLogout;

@@ -1,6 +1,5 @@
 import { Menu } from 'react-daisyui';
 import { FaHome, FaTable, FaUsers } from 'react-icons/fa';
-import { Navigate } from 'react-router-dom';
 import MenuDropdown from './MenuDropdown';
 import MenuLink from './MenuLink';
 
@@ -16,9 +15,6 @@ const menuList = [
     to: '/dashboard/users',
     icon: <FaTable />,
     label: 'Manage Users',
-    onDoubleClick: () => {
-      return <Navigate to="/dashboard/users"/>
-    },
     contentMap: [
       { to: '#', label: 'Users Table', icon: <FaTable /> },
       { to: '#', label: 'Users List', icon: <FaUsers /> },
@@ -31,18 +27,20 @@ const SidebarMenu = () => {
   return (
     <Menu>
       {menuList.map((value, index) => {
+        const { type, ...props } = value;
+
         return (
           <>
             <Menu.Item key={index}>
-              {value.type === 'link' ? (
+              {type === 'link' ? (
                 <MenuLink
                   key={index}
-                  {...value}
+                  {...props}
                 />
               ) : (
                 <MenuDropdown
                   key={index}
-                  {...value}
+                  {...props}
                 />
               )}
             </Menu.Item>

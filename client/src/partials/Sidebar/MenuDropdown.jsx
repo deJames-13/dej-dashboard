@@ -1,11 +1,14 @@
 import { PropTypes } from 'prop-types';
+import { useNavigate } from 'react-router-dom';
 import MenuLink from './MenuLink';
 
-const MenuDropdown = ({ label, icon, contentMap, ...props }) => {
+const MenuDropdown = ({ to, label, icon, contentMap, ...props }) => {
+  const navigate = useNavigate();
   return (
     <div
       className="p-0 m-0 font-bold collapse collapse-arrow group"
       {...props}
+      onDoubleClick={() => navigate(to)}
     >
       <input
         type="checkbox"
@@ -35,6 +38,7 @@ const MenuDropdown = ({ label, icon, contentMap, ...props }) => {
 };
 
 MenuDropdown.propTypes = {
+  to: PropTypes.string,
   label: PropTypes.string,
   icon: PropTypes.node,
   contentMap: PropTypes.array,
