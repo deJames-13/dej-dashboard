@@ -30,21 +30,7 @@ const SidebarMenu = () => {
         const { type, ...props } = value;
 
         return (
-          <>
-            <Menu.Item key={index}>
-              {type === 'link' ? (
-                <MenuLink
-                  key={index}
-                  {...props}
-                />
-              ) : (
-                <MenuDropdown
-                  key={index}
-                  {...props}
-                />
-              )}
-            </Menu.Item>
-          </>
+          <Menu.Item key={index}>{type === 'link' ? <MenuLink {...props} /> : <MenuDropdown {...props} />}</Menu.Item>
         );
       })}
     </Menu>
