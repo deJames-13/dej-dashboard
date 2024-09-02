@@ -20,7 +20,8 @@ lerna-debug.log*
 *.njsproj
 *.sln
 *.sw?
-
+.pub
+github-ssh
 # Build files
 dist
 dist-ssr
