@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-function UserCard(props) {
+function UserCard() {
   return <div>UserCard</div>;
 }
 

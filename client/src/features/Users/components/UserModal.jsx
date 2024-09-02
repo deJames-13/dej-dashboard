@@ -1,6 +1,4 @@
-import PropTypes from 'prop-types';
-
-function UserModal(props) {
+function UserModal() {
   return <div>UserModal</div>;
 }
 
