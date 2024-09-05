@@ -44,12 +44,16 @@ function SignupFrom() {
     <FormikForm
       formikProps={{ ...signupFormik, onSubmit: handleSignup }}
       formSchema={signupSchema}
-      element={({ isSubmitting }) => {
+      element={({ isSubmitting, ...rest }) => {
         return (
           <Button
             variant="outline"
             color="primary"
+            type="button"
             disabled={isSubmitting || isLoading}
+            onClick={() => {
+              console.log(rest);
+            }}
           >
             Sign Up
           </Button>

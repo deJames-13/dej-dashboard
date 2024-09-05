@@ -11,9 +11,11 @@ const ActionButtons = ({
   showEdit = true,
   showDelete = true,
   className = '',
+  isLoading = false,
 }) => {
+  if (isLoading) return <span className="loading loading-spinner loading-md"></span>;
   return (
-    <div className={'d-flex justify-content-between' + className}>
+    <div className={'flex justify-end' + className}>
       {showView && <ViewButton onClick={onView} />}
       {showEdit && <EditButton onClick={onEdit} />}
       {showDelete && <DeleteButton onClick={onDelete} />}
@@ -29,6 +31,7 @@ ActionButtons.propTypes = {
   showEdit: PropTypes.bool,
   showDelete: PropTypes.bool,
   className: PropTypes.string,
+  isLoading: PropTypes.bool,
 };
 
 export default ActionButtons;

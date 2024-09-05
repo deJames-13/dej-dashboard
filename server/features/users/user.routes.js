@@ -44,4 +44,14 @@ export default [
     method: METHODS.GET,
     controller: controller.getById,
   },
+  {
+    path: '/:id',
+    method: METHODS.PATCH,
+    controller: [protectAndPermit(READ_WRITE), controller.update],
+  },
+  {
+    path: '/:id',
+    method: METHODS.DELETE,
+    controller: [protectAndPermit(READ_WRITE), controller.delete],
+  },
 ];
