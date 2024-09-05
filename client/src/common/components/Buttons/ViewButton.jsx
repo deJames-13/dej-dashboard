@@ -32,7 +32,7 @@ const ViewButton = ({ onClick, text = '', className = '' }) => {
 };
 
 ViewButton.propTypes = {
-  onClick: PropTypes.func.isRequired,
+  onClick: PropTypes.func,
   text: PropTypes.string,
   className: PropTypes.string,
 };
