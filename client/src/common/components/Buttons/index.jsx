@@ -18,5 +18,9 @@ function Button({ children, ...buttonProps }) {
 Button.propTypes = propTypes;
 
 export default Button;
+export { default as ActionButtons } from './ActionButtons';
 export { default as BackButton } from './BackButton';
+export { default as DeleteButton } from './DeleteButton';
+export { default as EditButton } from './EditButton';
 export { default as LinkButton } from './LinkButton';
+export { default as ViewButton } from './ViewButton';
