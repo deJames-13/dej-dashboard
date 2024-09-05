@@ -54,32 +54,34 @@ const UserTable = () => {
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading users</div>;
   return (
-    <div className="w-full h-full p-4">
+    <div className="w-full h-full">
       <PageTitle title="Users Table" />
-      <div className="flex justify-end mb-4">
-        <Button
-          color="primary"
-          className="my-4"
-          onClick={() => navigate('/dashboard/users/create')}
-        >
-          Create User
-        </Button>
+      <div className="p-4">
+        <div className="flex justify-end mb-4">
+          <Button
+            color="primary"
+            className="my-4"
+            onClick={() => navigate('/dashboard/users/create')}
+          >
+            Create User
+          </Button>
+        </div>
+        <Table
+          data={users.map((user) => ({
+            ...user,
+            actions: (
+              <ActionButtons
+                className="flex justify-end"
+                isLoading={isDeleting}
+                onDelete={() => handleDelete(user.id)}
+                onEdit={() => navigate(`/dashboard/users/${user.id}/edit`)}
+                onView={() => navigate(`/dashboard/users/${user.id}/view`)}
+              />
+            ),
+          }))}
+          columns={allowedColumns()}
+        />
       </div>
-      <Table
-        data={users.map((user) => ({
-          ...user,
-          actions: (
-            <ActionButtons
-              className="flex justify-end"
-              isLoading={isDeleting}
-              onDelete={() => handleDelete(user.id)}
-              onEdit={() => navigate(`/dashboard/users/${user.id}/edit`)}
-              onView={() => navigate(`/dashboard/users/${user.id}/view`)}
-            />
-          ),
-        }))}
-        columns={allowedColumns()}
-      />
     </div>
   );
 };

@@ -2,7 +2,7 @@ import { PropTypes } from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import MenuLink from './MenuLink';
 
-const MenuDropdown = ({ to, label, icon, contentMap, ...props }) => {
+const MenuDropdown = ({ to, label, icon, subLinks, ...props }) => {
   const navigate = useNavigate();
   return (
     <div
@@ -14,25 +14,20 @@ const MenuDropdown = ({ to, label, icon, contentMap, ...props }) => {
         type="checkbox"
         className="peer"
       />
-      <div className="flex items-center gap-2 collapse-title py-0">
+      <div className="flex items-center gap-2 py-0 collapse-title">
         {icon}
         {label}
       </div>
-      <div className="collapse-content py-0">
-        {contentMap.map((item, index) =>
-          item?.to || item?.label ? (
-            <span key={index}>
-              <MenuLink
-                to={item.to || '#'}
-                icon={item?.icon || ''}
-                label={item.label}
-                addClass="px-2"
-              />
-            </span>
+      <div className="py-0 collapse-content">
+        {subLinks.map((item, index) => {
+          const { type, ...props } = item;
+
+          return props?.to || props?.label ? (
+            <span key={index}>{type === 'dropdown' ? <MenuDropdown {...props} /> : <MenuLink {...props} />}</span>
           ) : (
             ''
-          )
-        )}
+          );
+        })}
       </div>
     </div>
   );
@@ -42,7 +37,7 @@ MenuDropdown.propTypes = {
   to: PropTypes.string,
   label: PropTypes.string,
   icon: PropTypes.node,
-  contentMap: PropTypes.array,
+  subLinks: PropTypes.array,
 };
 
 export default MenuDropdown;
