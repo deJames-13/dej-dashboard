@@ -17,20 +17,21 @@ const UserTable = () => {
 
   useEffect(() => {
     const fetchUsers = async () => {
+      const res = await getUsers().unwrap();
+      setUsers(res.resource || []);
+    };
+
+    return () => {
       try {
-        const res = await getUsers().unwrap();
-        setUsers(res.resource || []);
+        fetchUsers();
       } catch (error) {
         toast.error(error.message);
       }
     };
-
-    fetchUsers();
   }, [getUsers]);
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading users</div>;
-
   return (
     <div className="w-full h-full p-4">
       <PageTitle title="Users Table" />
