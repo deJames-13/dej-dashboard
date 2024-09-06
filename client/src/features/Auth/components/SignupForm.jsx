@@ -49,11 +49,8 @@ function SignupFrom() {
           <Button
             variant="outline"
             color="primary"
-            type="button"
+            type="submit"
             disabled={isSubmitting || isLoading}
-            onClick={() => {
-              console.log(rest);
-            }}
           >
             Sign Up
           </Button>
