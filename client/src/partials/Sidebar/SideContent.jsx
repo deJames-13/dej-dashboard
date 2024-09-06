@@ -6,8 +6,10 @@ import { BsPinAngleFill } from 'react-icons/bs';
 import { FaArrowAltCircleLeft, FaHome } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
 import SidebarMenu from './SidebarMenu';
+import { useSelector } from 'react-redux';
 
 const SideContent = (props) => {
+  const { userInfo } = useSelector((state) => state.auth);
   const { pin, togglePin, toggleVisible, ...overlayProps } = props;
   const { noOverlay, noOverlayEvent } = overlayProps;
   return (
@@ -29,7 +31,7 @@ const SideContent = (props) => {
             >
               <FaArrowAltCircleLeft />
               <TextRainbow
-                text="Dashboard"
+                text={userInfo?.username || 'Dashboard'}
                 className="text-xl font-extrabold"
               />
             </Button>
