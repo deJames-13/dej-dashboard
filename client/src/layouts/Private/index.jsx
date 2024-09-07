@@ -1,6 +1,7 @@
 import { useToggle } from '@common';
 import { useCheckAuth } from '@custom';
 import { DashboardHeader, FooterWrapper, Sidebar } from '@partials';
+import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
 
 function PrivateLayout() {
@@ -25,7 +26,9 @@ function PrivateLayout() {
           />
           <div className="relative w-full">
             <div className="container grid min-h-screen mx-auto place-items-center">
-              <Outlet context={{ userInfo }} />
+              <Suspense fallback={<div>Loading...</div>}>
+                <Outlet context={{ userInfo }} />
+              </Suspense>
             </div>
             <FooterWrapper />
           </div>

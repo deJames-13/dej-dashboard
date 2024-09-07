@@ -10,34 +10,28 @@ export const userRoutes = [
   {
     path: '/dashboard/users/:id/edit',
     element: (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <UserForm
-          action="edit"
-          title="Edit User"
-        />
-      </React.Suspense>
+      <UserForm
+        action="edit"
+        title="Edit User"
+      />
     ),
   },
   {
     path: '/dashboard/users/:id/view',
     element: (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <UserForm
-          action="view"
-          title="View User"
-        />
-      </React.Suspense>
+      <UserForm
+        action="view"
+        title="View User"
+      />
     ),
   },
   {
     path: '/dashboard/users/create',
     element: (
-      <React.Suspense fallback={<div>Loading...</div>}>
-        <UserForm
-          action="create"
-          title="Create User"
-        />
-      </React.Suspense>
+      <UserForm
+        action="create"
+        title="Create User"
+      />
     ),
   },
 ];
