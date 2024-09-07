@@ -24,3 +24,18 @@ export const validate = async (req, res, validationRules) => {
   }
   return matchedData(req);
 };
+
+/**
+ * Checks if a field value is unique in the database.
+ * @param {Object} model - The model to check against.
+ * @param {string} field - The field to check.
+ * @param {string} value - The value to check.
+ * @param {string} excludeId - The ID to exclude from the check.
+ * @returns {Promise<void>} - A promise that resolves when the check is complete.
+ */
+export const unique = async (model, field, value, excludeId) => {
+  const record = await model.findOne({ [field]: value, _id: { $ne: excludeId } });
+  if (record) {
+    throw new Error(`${field} must be unique`);
+  }
+};

@@ -6,7 +6,11 @@ const Example = new Schema({
     {
       name: {
         type: String,
+        unique: [true, 'Example name must be unique'],
         required: [true, 'Example name is required'],
+      },
+      slug: {
+        type: String,
       },
     },
     { timestamps: true },

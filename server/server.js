@@ -2,6 +2,7 @@ import { connectDB, MONGO_URI, PORT } from '#config';
 import * as error from '#middlewares/error.middleware';
 import cookieParser from 'cookie-parser';
 import express from 'express';
+import morgan from 'morgan';
 import path from 'path';
 import router from './routes/index.js';
 
@@ -25,6 +26,7 @@ const production = (app) => {
 const server = () => {
   const app = express();
 
+  app.use(morgan('dev'));
   app.use(express.json());
   app.use(express.urlencoded({ extended: true }));
   app.use(cookieParser());
