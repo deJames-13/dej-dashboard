@@ -39,10 +39,10 @@ const UserForm = ({ title = 'User Form', action = 'create' }) => {
   const initialValues = useMemo(
     () =>
       userSchema.reduce((acc, field) => {
-        acc[field.name] = user?.[field.name] || '';
+        acc[field.name] = action === 'create' ? '' : user?.[field.name] ?? '';
         return acc;
       }, {}),
-    [user, userSchema]
+    [user, userSchema, action]
   );
 
   const handleSubmit = (values) => async () => {
@@ -56,7 +56,13 @@ const UserForm = ({ title = 'User Form', action = 'create' }) => {
       }
       navigate('/dashboard/users/table');
     } catch (e) {
-      toast.error(e?.data?.message || e.error);
+      console.log(e);
+      const errors = e?.data?.errors?.details;
+      if (Array.isArray(errors)) {
+        errors.forEach((error) => {
+          toast.error(error?.msg || 'test');
+        });
+      } else toast.error(e?.data?.message || e.error);
     }
   };
 
