@@ -2,6 +2,7 @@ import { ActionButtons, Table } from '@common';
 import { PageTitle } from '@partials';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-daisyui';
+import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { exampleApi } from '../example.api';
@@ -46,20 +47,32 @@ const ExampleTable = () => {
 
   if (isLoading) return <div>Loading...</div>;
   if (isError) return <div>Error loading examples</div>;
+  if (!examples.length)
+    return (
+      <div className="flex items-center justify-center space-x-2 font-bold text-center">
+        <span>No data found! Create one. </span>
+        <Button
+          color="primary"
+          className="my-4"
+          onClick={() => navigate('/dashboard/examples/create')}
+        >
+          <FaPlus />
+        </Button>
+      </div>
+    );
   return (
     <>
       <div className="w-full h-full">
-        <PageTitle title="Examples Table" />
+        <PageTitle title="Examples Table">
+          <Button
+            color="primary"
+            className="my-4"
+            onClick={() => navigate('/dashboard/examples/create')}
+          >
+            Create Example
+          </Button>
+        </PageTitle>
         <div className="p-4">
-          <div className="flex justify-end mb-4">
-            <Button
-              color="primary"
-              className="my-4"
-              onClick={() => navigate('/dashboard/examples/create')}
-            >
-              Create Example
-            </Button>
-          </div>
           <Table
             data={examples.map((example) => ({
               ...example,

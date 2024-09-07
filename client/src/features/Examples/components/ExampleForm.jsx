@@ -1,10 +1,11 @@
+import { useSlug } from '@common';
 import { FormikForm } from '@common/components';
 import { PageTitle } from '@partials';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
 import { Button } from 'react-daisyui';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { exampleApi } from '../example.api';
 import { exampleValidation } from '../example.validation';
@@ -21,12 +22,13 @@ const altFields = [
 
 const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   const navigate = useNavigate();
-  const { slug } = useParams();
+
   const [example, setExample] = useState(null);
   const [exampleSchema, setExampleSchema] = useState(fields);
   const [createExample, { isLoading: isCreating }] = exampleApi.useCreateExampleMutation();
   const [updateExample, { isLoading: isUpdating }] = exampleApi.useUpdateExampleMutation();
   const [getExample, { isLoading: isFetching }] = exampleApi.useGetExampleMutation();
+  const { slug, setSlug, oldSlug } = useSlug();
 
   const initialValues = useMemo(
     () =>
@@ -38,37 +40,36 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   );
 
   useEffect(() => {
-    console.log(slug);
     const fetchExample = async () => {
       getExample(slug).then((res) => {
-        setExample(res.data.resource);
+        if (res.error) {
+          toast.error(res.error.data.message);
+          navigate('/dashboard/examples/table');
+        } else if (res.data) setExample(res.data.resource);
       });
     };
 
-    return () => {
-      if (slug) {
-        fetchExample();
-      } else {
-        setExampleSchema(action === 'create' ? fields : altFields);
-      }
-    };
-  }, [action, slug, getExample]);
+    if (slug && slug === oldSlug) fetchExample();
+    else setExampleSchema(action === 'create' ? fields : altFields);
+  }, [action, slug, getExample, navigate, oldSlug]);
 
-  const handleSubmit = (values) => async () => {
+  const handleSubmit = async (values) => {
     try {
       if (action === 'create') {
         await createExample(values).unwrap();
         toast.success('Example created successfully');
+        navigate('/dashboard/examples/table');
       } else {
-        await updateExample({ id: example.id, example: values }).unwrap();
+        const res = await updateExample({ id: example.id, example: values }).unwrap();
+        const updatedExample = res?.resource || { ...example, ...values };
         toast.success('Example updated successfully');
+        setSlug(updatedExample.slug);
       }
-      navigate('/dashboard/examples/table');
     } catch (e) {
       const errors = e?.data?.errors?.details;
       if (Array.isArray(errors)) {
         errors.forEach((error) => {
-          toast.error(error?.msg || 'test');
+          toast.error(error?.msg || 'Error while performing action');
         });
       } else toast.error(e?.data?.message || e.error);
     }
@@ -76,13 +77,22 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
 
   return (
     <div className="w-full h-full">
-      <PageTitle title={title} />
-
+      <PageTitle title={title}>
+        <Button
+          type="button"
+          variant="outline"
+          color="primary"
+          onClick={() => navigate('/dashboard/examples/table')}
+        >
+          Back
+        </Button>
+      </PageTitle>
       <div className="container p-8">
         <FormikForm
           formikProps={{
             initialValues,
             validationSchema: exampleValidation,
+            onSubmit: handleSubmit,
             enableReinitialize: true,
           }}
           className="flex flex-wrap gap-8"
@@ -95,8 +105,9 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
               <div className="flex w-full">
                 <Button
                   variant="outline"
-                  type="button"
-                  onClick={handleSubmit(values)}
+                  type="submit"
+                  // type="button"
+                  // onClick={handleSubmit(values)}
                   color="primary"
                   className="max-w-md"
                   disabled={isButtonDisabled}

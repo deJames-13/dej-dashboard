@@ -13,10 +13,10 @@ export class Controller {
   // controller functions
   getALl = async (req, res) => {
     const data = await this.service?.getAll();
-    if (!data.length) return this.error({ res, message: 'No data found!' });
+    const message = data.length ? 'Data collection fetched!' : 'No data found!';
 
     const resource = this.resource?.collection(data) || data;
-    this.success({ res, message: 'Data collection fetched!', resource });
+    this.success({ res, message, resource });
   };
 
   getById = async (req, res) => {
