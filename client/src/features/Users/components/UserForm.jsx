@@ -42,10 +42,10 @@ const UserForm = ({ title = 'User Form', action = 'create' }) => {
         acc[field.name] = user?.[field.name] || '';
         return acc;
       }, {}),
-    [user]
+    [user, userSchema]
   );
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = (values) => async () => {
     try {
       if (action === 'create') {
         await createUser(values).unwrap();
@@ -82,7 +82,7 @@ const UserForm = ({ title = 'User Form', action = 'create' }) => {
                 <Button
                   variant="outline"
                   type="button"
-                  onClick={() => handleSubmit(values)}
+                  onClick={handleSubmit(values)}
                   color="primary"
                   className="max-w-md"
                   disabled={isButtonDisabled}
