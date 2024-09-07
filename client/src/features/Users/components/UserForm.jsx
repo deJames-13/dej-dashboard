@@ -56,7 +56,6 @@ const UserForm = ({ title = 'User Form', action = 'create' }) => {
       }
       navigate('/dashboard/users/table');
     } catch (e) {
-      console.log(e);
       const errors = e?.data?.errors?.details;
       if (Array.isArray(errors)) {
         errors.forEach((error) => {
