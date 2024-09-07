@@ -1,9 +1,13 @@
-import PropTypes from 'prop-types';
+import { PageTitle } from '@partials';
 
-function ExampleList(props) {
-  return <div>ExampleList</div>;
+function ExampleList() {
+  return (
+    <>
+      <div className="w-full h-full">
+        <PageTitle title="Examples List" />
+      </div>
+    </>
+  );
 }
-
-ExampleList.propTypes = {};
 
 export default ExampleList;

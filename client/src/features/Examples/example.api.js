@@ -1,13 +1,40 @@
 import { apiSlice } from '@app/config';
 
-export const exampleApi = apiSlice.injectEndpoints({
+const exampleApi = apiSlice.injectEndpoints({
   endpoints: (build) => ({
-    exampleQuery: build.mutation({
-      //   query: (body) => ({
-      //     url: 'path/to/query',
-      //     method: 'POST',
-      //     body,
-      //   }),
+    getExamples: build.mutation({
+      query: () => ({
+        url: '/examples',
+        method: 'GET',
+      }),
+    }),
+    getExample: build.mutation({
+      query: (id) => ({
+        url: `/examples/${id}`,
+        method: 'GET',
+      }),
+    }),
+    deleteExample: build.mutation({
+      query: (id) => ({
+        url: `/examples/delete/${id}`,
+        method: 'DELETE',
+      }),
+    }),
+    createExample: build.mutation({
+      query: (example) => ({
+        url: '/examples',
+        method: 'POST',
+        body: example,
+      }),
+    }),
+    updateExample: build.mutation({
+      query: ({ id, example }) => ({
+        url: `/examples/edit/${id}`,
+        method: 'PATCH',
+        body: example,
+      }),
     }),
   }),
 });
+
+export { exampleApi };

@@ -1,7 +1,10 @@
 import { Resource } from '#lib';
 export default class ExampleResource extends Resource {
-  // override transform
-  // transform(example) {
-  //   return {}
-  // }
+  transform(example) {
+    const { _id, ...rest } = example;
+    return {
+      id: _id,
+      ...rest,
+    };
+  }
 }
