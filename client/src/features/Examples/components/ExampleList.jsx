@@ -1,13 +1,7 @@
-import { PageTitle } from '@partials';
+import ExampleWrapper from './ExampleWrapper';
 
 function ExampleList() {
-  return (
-    <>
-      <div className="w-full h-full">
-        <PageTitle title="Examples List" />
-      </div>
-    </>
-  );
+  return <ExampleWrapper title="Examples List"></ExampleWrapper>;
 }
 
 export default ExampleList;

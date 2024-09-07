@@ -6,6 +6,7 @@ import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { exampleApi } from '../example.api';
+import ExampleWrapper from './ExampleWrapper';
 
 const allowedColumns = () => [
   { key: 'name', label: 'Name' },
@@ -62,35 +63,24 @@ const ExampleTable = () => {
     );
   return (
     <>
-      <div className="w-full h-full">
-        <PageTitle title="Examples Table">
-          <Button
-            color="primary"
-            className="my-4"
-            onClick={() => navigate('/dashboard/examples/create')}
-          >
-            Create Example
-          </Button>
-        </PageTitle>
-        <div className="p-4">
-          <Table
-            data={examples.map((example) => ({
-              ...example,
-              actions: (
-                <ActionButtons
-                  key={'action_' + example.slug}
-                  className="flex justify-end"
-                  isLoading={isDeleting}
-                  onDelete={() => handleDelete(example.id)}
-                  onEdit={() => navigate(`/dashboard/examples/${example.slug}/edit`)}
-                  onView={() => navigate(`/dashboard/examples/${example.slug}/view`)}
-                />
-              ),
-            }))}
-            columns={allowedColumns()}
-          />
-        </div>
-      </div>
+      <ExampleWrapper title="Examples Table">
+        <Table
+          data={examples.map((example) => ({
+            ...example,
+            actions: (
+              <ActionButtons
+                key={'action_' + example.slug}
+                className="flex justify-end"
+                isLoading={isDeleting}
+                onDelete={() => handleDelete(example.id)}
+                onEdit={() => navigate(`/dashboard/examples/${example.slug}/edit`)}
+                onView={() => navigate(`/dashboard/examples/${example.slug}/view`)}
+              />
+            ),
+          }))}
+          columns={allowedColumns()}
+        />
+      </ExampleWrapper>
     </>
   );
 };

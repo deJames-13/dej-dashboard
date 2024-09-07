@@ -1,8 +1,6 @@
 import PropTypes from 'prop-types';
-import React from 'react';
 
 function ExampleView({ example }) {
-  console.log(example);
   return <div></div>;
 }
 

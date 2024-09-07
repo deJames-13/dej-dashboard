@@ -1,6 +1,5 @@
 import { useSlug } from '@common';
 import { FormikForm } from '@common/components';
-import { PageTitle } from '@partials';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -10,6 +9,7 @@ import { toast } from 'react-toastify';
 import { exampleApi } from '../example.api';
 import { altFields, fields } from '../example.fields';
 import { exampleValidation } from '../example.validation';
+import ExampleWrapper from './ExampleWrapper';
 
 const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   const navigate = useNavigate();
@@ -40,7 +40,7 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
       });
     };
 
-    if (slug === oldSlug) fetchExample();
+    if (slug && slug === oldSlug) fetchExample();
     else setExampleSchema(action === 'create' ? fields : altFields);
   }, [action, slug, oldSlug, getExample, navigate]);
 
@@ -67,48 +67,39 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   };
 
   return (
-    <div className="w-full h-full">
-      <PageTitle title={title}>
-        <Button
-          type="button"
-          variant="outline"
-          color="primary"
-          onClick={() => navigate('/dashboard/examples/table')}
-        >
-          Back
-        </Button>
-      </PageTitle>
-      <div className="container p-8">
-        <FormikForm
-          formikProps={{
-            initialValues,
-            validationSchema: exampleValidation,
-            onSubmit: handleSubmit,
-            enableReinitialize: true,
-          }}
-          className="flex flex-wrap gap-8"
-          formSchema={exampleSchema}
-          element={({ isSubmitting, values }) => {
-            const isFormChanged = !isEqual(initialValues, values);
-            const isButtonDisabled = isSubmitting || isCreating || isUpdating || isFetching || !isFormChanged;
+    <ExampleWrapper
+      title={title}
+      prevUrl="/dashboard/examples/table"
+    >
+      <FormikForm
+        formikProps={{
+          initialValues,
+          validationSchema: exampleValidation,
+          onSubmit: handleSubmit,
+          enableReinitialize: true,
+        }}
+        className="flex flex-wrap gap-8"
+        formSchema={exampleSchema}
+        element={({ isSubmitting, values }) => {
+          const isFormChanged = !isEqual(initialValues, values);
+          const isButtonDisabled = isSubmitting || isCreating || isUpdating || isFetching || !isFormChanged;
 
-            return (
-              <div className="flex w-full">
-                <Button
-                  variant="outline"
-                  type="submit"
-                  color="primary"
-                  className="max-w-md"
-                  disabled={isButtonDisabled}
-                >
-                  {action === 'create' ? 'Create Example' : 'Update Example'}
-                </Button>
-              </div>
-            );
-          }}
-        />
-      </div>
-    </div>
+          return (
+            <div className="flex w-full">
+              <Button
+                variant="outline"
+                type="submit"
+                color="primary"
+                className="max-w-md"
+                disabled={isButtonDisabled}
+              >
+                {action === 'create' ? 'Create Example' : 'Update Example'}
+              </Button>
+            </div>
+          );
+        }}
+      />
+    </ExampleWrapper>
   );
 };
 
