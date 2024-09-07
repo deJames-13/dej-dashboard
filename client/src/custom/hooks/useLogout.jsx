@@ -1,3 +1,4 @@
+import { confirmLogout } from '@custom/utils';
 import { authApi, logout as logoutAction } from '@features';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -22,14 +23,16 @@ const useLogout = () => {
   const handleLogout = useCallback(
     async (e) => {
       e?.preventDefault();
-      try {
-        await logout();
-        navigate('/login');
-        toast.success('Logged out successfully');
-      } catch (error) {
-        if ([401, 403].includes(error?.status)) return toast.error('Logged out due to unauthorized access');
-        toast.error(error?.data?.message || 'Logout failed');
-      }
+      confirmLogout(async () => {
+        try {
+          await logout();
+          navigate('/login');
+          toast.success('Logged out successfully');
+        } catch (error) {
+          if ([401, 403].includes(error?.status)) return toast.error('Logged out due to unauthorized access');
+          toast.error(error?.data?.message || 'Logout failed');
+        }
+      });
     },
     [logout, navigate]
   );
