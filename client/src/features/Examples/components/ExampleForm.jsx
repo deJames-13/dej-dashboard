@@ -8,17 +8,8 @@ import { Button } from 'react-daisyui';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { exampleApi } from '../example.api';
+import { altFields, fields } from '../example.fields';
 import { exampleValidation } from '../example.validation';
-
-const fields = [
-  { label: 'Name', name: 'name', type: 'text' },
-  // More fields can be added here
-];
-
-const altFields = [
-  { label: 'Name', name: 'name', type: 'text' },
-  // alternate fields can be added here
-];
 
 const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   const navigate = useNavigate();
@@ -49,9 +40,9 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
       });
     };
 
-    if (slug && slug === oldSlug) fetchExample();
+    if (slug === oldSlug) fetchExample();
     else setExampleSchema(action === 'create' ? fields : altFields);
-  }, [action, slug, getExample, navigate, oldSlug]);
+  }, [action, slug, oldSlug, getExample, navigate]);
 
   const handleSubmit = async (values) => {
     try {
@@ -62,8 +53,8 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
       } else {
         const res = await updateExample({ id: example.id, example: values }).unwrap();
         const updatedExample = res?.resource || { ...example, ...values };
-        toast.success('Example updated successfully');
         setSlug(updatedExample.slug);
+        toast.success('Example updated successfully');
       }
     } catch (e) {
       const errors = e?.data?.errors?.details;
@@ -106,8 +97,6 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
                 <Button
                   variant="outline"
                   type="submit"
-                  // type="button"
-                  // onClick={handleSubmit(values)}
                   color="primary"
                   className="max-w-md"
                   disabled={isButtonDisabled}
