@@ -1,5 +1,6 @@
 import { useSlug } from '@common';
 import { FormikForm } from '@common/components';
+import { confirmSave } from '@custom';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -45,25 +46,27 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   }, [action, slug, oldSlug, getExample, navigate]);
 
   const handleSubmit = async (values) => {
-    try {
-      if (action === 'create') {
-        await createExample(values).unwrap();
-        toast.success('Example created successfully');
-        navigate('/dashboard/examples/table');
-      } else {
-        const res = await updateExample({ id: example.id, example: values }).unwrap();
-        const updatedExample = res?.resource || { ...example, ...values };
-        setSlug(updatedExample.slug);
-        toast.success('Example updated successfully');
+    confirmSave(async () => {
+      try {
+        if (action === 'create') {
+          await createExample(values).unwrap();
+          toast.success('Example created successfully');
+          navigate('/dashboard/examples/table');
+        } else {
+          const res = await updateExample({ id: example.id, example: values }).unwrap();
+          const updatedExample = res?.resource || { ...example, ...values };
+          setSlug(updatedExample.slug);
+          toast.success('Example updated successfully');
+        }
+      } catch (error) {
+        const errors = error?.data?.errors?.details;
+        if (Array.isArray(errors)) {
+          errors.forEach((error) => {
+            toast.error(error?.msg || 'Error while performing action');
+          });
+        } else toast.error(error?.data?.message || 'Error while performing action.');
       }
-    } catch (e) {
-      const errors = e?.data?.errors?.details;
-      if (Array.isArray(errors)) {
-        errors.forEach((error) => {
-          toast.error(error?.msg || 'Error while performing action');
-        });
-      } else toast.error(e?.data?.message || e.error);
-    }
+    });
   };
 
   return (

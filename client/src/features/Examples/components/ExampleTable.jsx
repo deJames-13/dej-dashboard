@@ -1,5 +1,5 @@
 import { ActionButtons, Table } from '@common';
-import { PageTitle } from '@partials';
+import { confirmDelete } from '@custom';
 import { useEffect, useState } from 'react';
 import { Button } from 'react-daisyui';
 import { FaPlus } from 'react-icons/fa';
@@ -23,11 +23,13 @@ const ExampleTable = () => {
 
   const handleDelete = async (id) => {
     try {
-      await deleteExample(id).unwrap();
-      setExamples(examples.filter((example) => example.id !== id));
-      toast.success('Example deleted successfully');
-    } catch (e) {
-      toast.error(e?.data?.message || 'Error while deleting resource.');
+      confirmDelete(async () => {
+        await deleteExample(id).unwrap();
+        setExamples(examples.filter((example) => example.id !== id));
+        toast.success('Example deleted successfully');
+      });
+    } catch (error) {
+      toast.error(error.message);
     }
   };
 
