@@ -65,12 +65,12 @@ const ExampleTable = () => {
               ...example,
               actions: (
                 <ActionButtons
-                  key={'action_' + example.id}
+                  key={'action_' + example.slug}
                   className="flex justify-end"
                   isLoading={isDeleting}
                   onDelete={() => handleDelete(example.id)}
-                  onEdit={() => navigate(`/dashboard/examples/${example.id}/edit`)}
-                  onView={() => navigate(`/dashboard/examples/${example.id}/view`)}
+                  onEdit={() => navigate(`/dashboard/examples/${example.slug}/edit`)}
+                  onView={() => navigate(`/dashboard/examples/${example.slug}/view`)}
                 />
               ),
             }))}

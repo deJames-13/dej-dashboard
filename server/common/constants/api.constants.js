@@ -26,6 +26,7 @@ export const STATUS = {
 
 export const PATHS = {
   ROOT: '/',
+  SLUG: '/slug/:slug',
   ALL: '/',
   STORE: '/',
   ID: '/:id',

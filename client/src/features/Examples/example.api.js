@@ -9,8 +9,8 @@ const exampleApi = apiSlice.injectEndpoints({
       }),
     }),
     getExample: build.mutation({
-      query: (id) => ({
-        url: `/examples/${id}`,
+      query: (slug) => ({
+        url: `/examples/slug/${slug}`,
         method: 'GET',
       }),
     }),

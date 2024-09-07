@@ -1,8 +1,34 @@
+import slugify from 'slugify';
 export class Service {
   model = null;
+  fieldToSlugify = null;
+  slugField = 'slug';
 
   _checkModel() {
-    if (!this.model) throw new Error('Model not set');
+    if (!this.model) throw new Error('Resource not set.');
+  }
+
+  hasSlugField() {
+    const hasSlug = this.slugField && this.model.schema.paths[this.slugField];
+    const hasFieldToSlugify = this.fieldToSlugify && this.model.schema.paths[this.fieldToSlugify];
+    return hasSlug && hasFieldToSlugify;
+  }
+
+  slugParams(field) {
+    return [
+      field,
+      {
+        lower: true,
+        strict: true,
+        trim: true,
+      },
+    ];
+  }
+
+  makeSlug(field) {
+    if (!this.hasSlugField()) return null;
+    field = field || this.fieldToSlugify;
+    return slugify(...this.slugParams(field));
   }
 
   async checkIfExists(filter) {
@@ -35,12 +61,16 @@ export class Service {
   async create(body) {
     this._checkModel();
     const data = this.model.filterFillables(body);
+    const slug = this.makeSlug(data[this.fieldToSlugify]);
+    if (slug) data[this.slugField] = slug;
     return this.model.create(data);
   }
 
   async update(id, body) {
     this._checkModel();
     const data = this.model.filterFillables(body);
+    const slug = this.makeSlug(data[this.fieldToSlugify]);
+    if (slug) data[this.slugField] = slug;
     return this.model.findByIdAndUpdate(id, data, { new: true });
   }
 

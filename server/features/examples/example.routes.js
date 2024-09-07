@@ -1,8 +1,7 @@
 import { METHODS, PATHS, READ_WRITE } from '#constants';
 import { protectAndPermit } from '#middlewares/auth.middleware';
-import ExampleController from './example.controller.js';
+import controller from './example.controller.js';
 
-const controller = ExampleController;
 export default [
   {
     path: PATHS.ALL,
@@ -28,5 +27,10 @@ export default [
     path: PATHS.ID,
     method: METHODS.GET,
     controller: controller.getById,
+  },
+  {
+    path: PATHS.SLUG,
+    method: METHODS.GET,
+    controller: controller.getBySlug,
   },
 ];

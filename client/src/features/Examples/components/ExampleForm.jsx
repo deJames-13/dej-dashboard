@@ -21,7 +21,7 @@ const altFields = [
 
 const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   const navigate = useNavigate();
-  const { id } = useParams();
+  const { slug } = useParams();
   const [example, setExample] = useState(null);
   const [exampleSchema, setExampleSchema] = useState(fields);
   const [createExample, { isLoading: isCreating }] = exampleApi.useCreateExampleMutation();
@@ -38,14 +38,21 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
   );
 
   useEffect(() => {
-    if (action === 'edit' && id) {
-      getExample(id).then((res) => {
+    console.log(slug);
+    const fetchExample = async () => {
+      getExample(slug).then((res) => {
         setExample(res.data.resource);
       });
-    } else {
-      setExampleSchema(action === 'create' ? fields : altFields);
-    }
-  }, [action, id, getExample]);
+    };
+
+    return () => {
+      if (slug) {
+        fetchExample();
+      } else {
+        setExampleSchema(action === 'create' ? fields : altFields);
+      }
+    };
+  }, [action, slug, getExample]);
 
   const handleSubmit = (values) => async () => {
     try {
@@ -53,7 +60,7 @@ const ExampleForm = ({ title = 'Example Form', action = 'create' }) => {
         await createExample(values).unwrap();
         toast.success('Example created successfully');
       } else {
-        await updateExample({ id, example: values }).unwrap();
+        await updateExample({ id: example.id, example: values }).unwrap();
         toast.success('Example updated successfully');
       }
       navigate('/dashboard/examples/table');

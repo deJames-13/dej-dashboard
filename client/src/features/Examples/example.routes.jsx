@@ -10,7 +10,16 @@ export const examplesRoutes = [
   { path: '/dashboard/examples/list', element: <ExampleList /> },
   { path: '/dashboard/examples', element: <ExamplePage /> },
   {
-    path: '/dashboard/examples/:id/edit',
+    path: '/dashboard/examples/:slug',
+    element: (
+      <ExampleForm
+        action="view"
+        title="View Example"
+      />
+    ),
+  },
+  {
+    path: '/dashboard/examples/:slug/edit',
     element: (
       <ExampleForm
         action="edit"
@@ -19,7 +28,7 @@ export const examplesRoutes = [
     ),
   },
   {
-    path: '/dashboard/examples/:id/view',
+    path: '/dashboard/examples/:slug/view',
     element: (
       <ExampleForm
         action="view"

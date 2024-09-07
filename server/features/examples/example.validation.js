@@ -6,9 +6,9 @@ const commonRules = () => {
   return [
     check('name')
       .notEmpty()
-      .withMessage('Name is required')
+      .withMessage('Name is required!')
       .matches(/^[a-zA-Z0-9 ]+$/)
-      .withMessage('Name must be alphanumeric'),
+      .withMessage('Name must be alphanumeric!'),
   ];
 };
 
@@ -18,7 +18,7 @@ const exampleCreateRules = () => {
     ...commonRules(),
     check('name')
       .custom((value) => unique(ExampleModel, 'name', value))
-      .withMessage('Name must be unique'),
+      .withMessage('Name must be unique!'),
   ];
 };
 
@@ -26,8 +26,10 @@ const exampleUpdateRules = () => {
   return [
     ...commonRules(),
     check('name')
-      .custom((value, { req }) => unique(ExampleModel, 'name', value, req?.params?.id))
-      .withMessage('Name must be unique'),
+      .custom((value, { req }) =>
+        unique(ExampleModel, 'name', value, req?.params?.id, { slug: { $ne: req?.params?.slug } })
+      )
+      .withMessage('Name must be unique!'),
   ];
 };
 export { exampleCreateRules, exampleUpdateRules };
