@@ -47,6 +47,7 @@ export const INDICATORS = {
 
 export const FEATURES_URL = {
   // BEFORE STARTING A PROJECT, MAKE SURE TO DECLARE THIS OR CHANGE THE PRE DEFINED URLS
+  EXAMPLES: '/examples',
   USERS: '/users',
   PRODUCTS: '/products',
   CARTS: '/carts',
