@@ -10,5 +10,6 @@ const v1 = [
     url: FEATURES_URL.EXAMPLES,
     router: features.exampleRoutes,
   },
+  // NEW ROUTE HERE ->
 ];
 export default v1;

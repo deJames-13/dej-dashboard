@@ -40,5 +40,16 @@ export const menuList = [
       { to: '/dashboard/posts/list', label: 'Posts List', icon: <FaUsers /> },
     ],
   },
+  {
+    label: 'Manage Categories',
+    type: 'dropdown',
+    to: '/dashboard/categories',
+    icon: <FaTable />,
+    subLinks: [
+      { to: '/dashboard/categories/table', label: 'Categories Table', icon: <FaTable /> },
+      { to: '/dashboard/categories/create', label: 'Create Categories', icon: <FaPlus /> },
+      { to: '/dashboard/categories/list', label: 'Categories List', icon: <FaUsers /> },
+    ],
+  },
 ];
 
