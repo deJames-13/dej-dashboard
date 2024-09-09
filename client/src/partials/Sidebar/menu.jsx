@@ -7,7 +7,7 @@ const makeMenu = () => [
     to: '/dashboard',
     icon: <FaHome />,
   },
-  // NEW ROUTE HERE -->
+  // NEW ROUTE HERE ->
   ...features.userMenu,
   ...features._exampleMenu,
 ];
