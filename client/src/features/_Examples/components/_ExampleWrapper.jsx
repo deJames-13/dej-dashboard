@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Button } from 'react-daisyui';
 import { useNavigate } from 'react-router-dom';
 
-function ExampleWrapper({ children, title, prevUrl }) {
+function _ExampleWrapper({ children, title, prevUrl }) {
   const navigate = useNavigate();
   return (
     <>
@@ -12,7 +12,7 @@ function ExampleWrapper({ children, title, prevUrl }) {
           <Button
             color="primary"
             className="my-4"
-            onClick={() => navigate(prevUrl || '/dashboard/examples')}
+            onClick={() => navigate(prevUrl || '/dashboard/_examples')}
           >
             Back
           </Button>
@@ -23,11 +23,11 @@ function ExampleWrapper({ children, title, prevUrl }) {
   );
 }
 
-ExampleWrapper.propTypes = {
+_ExampleWrapper.propTypes = {
   children: PropTypes.node,
   title: PropTypes.string,
   prevUrl: PropTypes.string,
 };
 
-export default ExampleWrapper;
+export default _ExampleWrapper;
 

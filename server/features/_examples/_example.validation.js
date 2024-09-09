@@ -1,6 +1,6 @@
 import { unique } from '#utils';
 import { check } from 'express-validator';
-import ExampleModel from './example.model.js';
+import _ExampleModel from './_example.model.js';
 
 const commonRules = () => {
   return [
@@ -12,27 +12,27 @@ const commonRules = () => {
   ];
 };
 
-const exampleCreateRules = () => {
+const _exampleCreateRules = () => {
   // METHOD CHAINING
   return [
     ...commonRules(),
     check('name')
-      .custom((value) => unique(ExampleModel, 'name', value))
+      .custom((value) => unique(_ExampleModel, 'name', value))
       .withMessage('Name must be unique!'),
   ];
 };
 
-const exampleUpdateRules = () => {
+const _exampleUpdateRules = () => {
   return [
     ...commonRules(),
     check('name')
       .custom((value, { req }) =>
-        unique(ExampleModel, 'name', value, req?.params?.id, { slug: { $ne: req?.params?.slug } })
+        unique(_ExampleModel, 'name', value, req?.params?.id, { slug: { $ne: req?.params?.slug } })
       )
       .withMessage('Name must be unique!'),
   ];
 };
-export { exampleCreateRules, exampleUpdateRules };
+export { _exampleCreateRules, _exampleUpdateRules };
 
 // // USING SCHEMA: BUT i don't like it
 // return checkSchema({

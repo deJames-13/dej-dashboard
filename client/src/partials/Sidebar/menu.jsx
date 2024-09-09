@@ -9,7 +9,7 @@ const makeMenu = () => [
   },
   // NEW ROUTE HERE -->
   ...features.userMenu,
-  ...features.exampleMenu,
+  ...features._exampleMenu,
 ];
 
 export default makeMenu;

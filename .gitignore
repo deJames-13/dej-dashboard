@@ -1,6 +1,9 @@
 package-lock.json
 node_modules
 
+# ignore example files
+_examples*.*
+
 # Logs
 logs
 *.log

@@ -1,8 +1,8 @@
 import { Service } from '#lib';
-import ExampleModel from './example.model.js';
+import _ExampleModel from './_example.model.js';
 
-class ExampleService extends Service {
-  model = ExampleModel;
+class _ExampleService extends Service {
+  model = _ExampleModel;
   fieldToSlugify = 'name';
 
   async getBySlug(slug) {
@@ -11,4 +11,4 @@ class ExampleService extends Service {
   }
 }
 
-export default new ExampleService();
+export default new _ExampleService();

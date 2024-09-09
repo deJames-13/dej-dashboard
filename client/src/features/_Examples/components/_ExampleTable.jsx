@@ -5,8 +5,8 @@ import { Button } from 'react-daisyui';
 import { FaPlus } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { exampleApi } from '../example.api';
-import ExampleWrapper from './ExampleWrapper';
+import { _exampleApi } from '../_example.api';
+import _ExampleWrapper from './_ExampleWrapper';
 
 const allowedColumns = () => [
   { key: 'name', label: 'Name' },
@@ -14,19 +14,19 @@ const allowedColumns = () => [
   // More columns can be added here
 ];
 
-const ExampleTable = () => {
+const _ExampleTable = () => {
   const navigate = useNavigate();
-  const { useGetExamplesMutation, useDeleteExampleMutation } = exampleApi;
-  const [examples, setExamples] = useState([]);
-  const [getExamples, { isLoading, isError }] = useGetExamplesMutation();
-  const [deleteExample, { isLoading: isDeleting }] = useDeleteExampleMutation();
+  const { useGet_ExamplesMutation, useDelete_ExampleMutation } = _exampleApi;
+  const [_examples, set_Examples] = useState([]);
+  const [get_Examples, { isLoading, isError }] = useGet_ExamplesMutation();
+  const [delete_Example, { isLoading: isDeleting }] = useDelete_ExampleMutation();
 
   const handleDelete = async (id) => {
     try {
       confirmDelete(async () => {
-        await deleteExample(id).unwrap();
-        setExamples(examples.filter((example) => example.id !== id));
-        toast.success('Example deleted successfully');
+        await delete_Example(id).unwrap();
+        set_Examples(_examples.filter((_example) => _example.id !== id));
+        toast.success('_Example deleted successfully');
       });
     } catch (error) {
       toast.error(error.message);
@@ -34,30 +34,30 @@ const ExampleTable = () => {
   };
 
   useEffect(() => {
-    const fetchExamples = async () => {
-      const res = await getExamples().unwrap();
-      setExamples(res.resource || []);
+    const fetch_Examples = async () => {
+      const res = await get_Examples().unwrap();
+      set_Examples(res.resource || []);
     };
 
     return () => {
       try {
-        fetchExamples();
+        fetch_Examples();
       } catch (error) {
         toast.error(error.message);
       }
     };
-  }, [getExamples]);
+  }, [get_Examples]);
 
   if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error loading examples</div>;
-  if (!examples.length)
+  if (isError) return <div>Error loading _examples</div>;
+  if (!_examples.length)
     return (
       <div className="flex items-center justify-center space-x-2 font-bold text-center">
         <span>No data found! Create one. </span>
         <Button
           color="primary"
           className="my-4"
-          onClick={() => navigate('/dashboard/examples/create')}
+          onClick={() => navigate('/dashboard/_examples/create')}
         >
           <FaPlus />
         </Button>
@@ -65,26 +65,26 @@ const ExampleTable = () => {
     );
   return (
     <>
-      <ExampleWrapper title="Examples Table">
+      <_ExampleWrapper title="_Examples Table">
         <Table
-          data={examples.map((example) => ({
-            ...example,
+          data={_examples.map((_example) => ({
+            ..._example,
             actions: (
               <ActionButtons
-                key={'action_' + example.slug}
+                key={'action_' + _example.slug}
                 className="flex justify-end"
                 isLoading={isDeleting}
-                onDelete={() => handleDelete(example.id)}
-                onEdit={() => navigate(`/dashboard/examples/${example.slug}/edit`)}
-                onView={() => navigate(`/dashboard/examples/${example.slug}/view`)}
+                onDelete={() => handleDelete(_example.id)}
+                onEdit={() => navigate(`/dashboard/_examples/${_example.slug}/edit`)}
+                onView={() => navigate(`/dashboard/_examples/${_example.slug}/view`)}
               />
             ),
           }))}
           columns={allowedColumns()}
         />
-      </ExampleWrapper>
+      </_ExampleWrapper>
     </>
   );
 };
 
-export default ExampleTable;
+export default _ExampleTable;

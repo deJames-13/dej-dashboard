@@ -1,10 +1,10 @@
 import { METHODS, PATHS, READ_WRITE } from '#constants';
 import { protectAndPermit } from '#middlewares/auth.middleware';
-import controller from './example.controller.js';
+import controller from './_example.controller.js';
 
 export default [
   {
-    url: '/examples',
+    url: '/_examples',
     router: [
       {
         path: PATHS.ALL,
