@@ -1,7 +1,7 @@
 import * as features from '@features';
-import { FaHome, FaPlus, FaTable, FaUsers } from 'react-icons/fa';
-
-export const menuList = [
+import { FaHome } from 'react-icons/fa';
+console.log(features);
+const menuList = [
   {
     label: 'Home',
     type: 'link',
@@ -9,7 +9,7 @@ export const menuList = [
     icon: <FaHome />,
   },
   // NEW ROUTE HERE -->
-  ...features.exampleMenu,
-  ...features.userMenu,
 ];
+
+export default menuList;
 

@@ -1,7 +1,7 @@
 import { Menu } from 'react-daisyui';
 import MenuDropdown from './MenuDropdown';
 import MenuLink from './MenuLink';
-import { menuList } from './menu';
+import menuList from './menu';
 
 const SidebarMenu = () => {
   return (
