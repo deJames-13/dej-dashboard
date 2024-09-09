@@ -29,27 +29,5 @@ export const menuList = [
       { to: '/dashboard/examples/list', label: 'Examples List', icon: <FaUsers /> },
     ],
   },
-  {
-    label: 'Manage Posts',
-    type: 'dropdown',
-    to: '/dashboard/posts',
-    icon: <FaTable />,
-    subLinks: [
-      { to: '/dashboard/posts/table', label: 'Posts Table', icon: <FaTable /> },
-      { to: '/dashboard/posts/create', label: 'Create Posts', icon: <FaPlus /> },
-      { to: '/dashboard/posts/list', label: 'Posts List', icon: <FaUsers /> },
-    ],
-  },
-  {
-    label: 'Manage Categories',
-    type: 'dropdown',
-    to: '/dashboard/categories',
-    icon: <FaTable />,
-    subLinks: [
-      { to: '/dashboard/categories/table', label: 'Categories Table', icon: <FaTable /> },
-      { to: '/dashboard/categories/create', label: 'Create Categories', icon: <FaPlus /> },
-      { to: '/dashboard/categories/list', label: 'Categories List', icon: <FaUsers /> },
-    ],
-  },
 ];
 
