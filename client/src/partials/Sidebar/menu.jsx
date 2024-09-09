@@ -8,8 +8,8 @@ const makeMenu = () => [
     icon: <FaHome />,
   },
   // NEW ROUTE HERE ->
-  ...features.userMenu,
-  ...features._exampleMenu,
+  ...features.userMenus,
+  ...features._exampleMenus,
 ];
 
 export default makeMenu;

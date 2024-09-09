@@ -1,6 +1,6 @@
 import { FaPlus, FaTable, FaUsers } from 'react-icons/fa';
 
-export const userMenu = [
+export const userMenus = [
   {
     label: 'Manage Users',
     type: 'dropdown',

@@ -1,6 +1,6 @@
 import { FaPlus, FaTable, FaUsers } from 'react-icons/fa';
 
-export const _exampleMenu = [
+export const _exampleMenus = [
   {
     label: 'Manage _Examples',
     type: 'dropdown',
@@ -13,3 +13,4 @@ export const _exampleMenu = [
     ],
   },
 ];
+
