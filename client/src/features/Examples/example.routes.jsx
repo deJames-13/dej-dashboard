@@ -5,7 +5,7 @@ const ExamplePage = React.lazy(() => import('./components/ExamplePage'));
 const ExampleList = React.lazy(() => import('./components/ExampleList'));
 const ExampleTable = React.lazy(() => import('./components/ExampleTable'));
 
-export const examplesRoutes = [
+export const exampleRoutes = [
   { path: '/dashboard/examples/table', element: <ExampleTable /> },
   { path: '/dashboard/examples/list', element: <ExampleList /> },
   { path: '/dashboard/examples', element: <ExamplePage /> },
