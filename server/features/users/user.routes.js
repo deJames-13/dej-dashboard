@@ -1,6 +1,6 @@
 import { METHODS, READ_WRITE } from '#constants';
 import { protectAndPermit } from '#middlewares/auth.middleware';
-import controller from './example.controller.js';
+import controller from './user.controller.js';
 
 export default [
   {
