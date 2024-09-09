@@ -1,9 +1,10 @@
 import { Menu } from 'react-daisyui';
+import makeMenu from './menu';
 import MenuDropdown from './MenuDropdown';
 import MenuLink from './MenuLink';
-import menuList from './menu';
 
 const SidebarMenu = () => {
+  const menuList = makeMenu();
   return (
     <Menu>
       {menuList.map((value, index) => {
