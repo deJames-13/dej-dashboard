@@ -1,4 +1,4 @@
-import * as features from '@features';
+import featureRoutes from '@features/routes';
 import { PrivateLayout } from '@layouts';
 import { Dashboard } from '@screens';
 
@@ -12,8 +12,7 @@ const privateRoutes = [
         element: <Dashboard />,
       },
       // NEW ROUTE HERE ->
-      ...features.userRoutes,
-      ...features._exampleRoutes,
+      ...featureRoutes,
     ],
   },
 ];

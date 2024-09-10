@@ -1,4 +1,4 @@
-import * as features from '@features';
+import featureMenus from '@features/menu';
 import { FaHome } from 'react-icons/fa';
 const makeMenu = () => [
   {
@@ -8,8 +8,7 @@ const makeMenu = () => [
     icon: <FaHome />,
   },
   // NEW ROUTE HERE ->
-  ...features.userMenus,
-  ...features._exampleMenus,
+  ...featureMenus,
 ];
 
 export default makeMenu;
