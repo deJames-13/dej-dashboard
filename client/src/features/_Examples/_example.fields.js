@@ -1,12 +1,12 @@
-const fields = [
+const getFields = () => [
   { label: 'Name', name: 'name', type: 'text' },
-  // More fields can be added here
+  // More getFields can be added here
 ];
 
-const altFields = [
+const getAltFields = () => [
   { label: 'Name', name: 'name', type: 'text' },
-  // alternate fields can be added here
+  // alternate getFields can be added here
 ];
 
-export { altFields, fields };
+export { getAltFields, getFields };
 

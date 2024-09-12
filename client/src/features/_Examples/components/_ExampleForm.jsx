@@ -8,9 +8,12 @@ import { Button } from 'react-daisyui';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { _exampleApi } from '../_example.api';
-import { altFields, fields } from '../_example.fields';
+import { getAltFields, getFields } from '../_example.fields';
 import { _exampleValidation } from '../_example.validation';
 import _ExampleWrapper from './_ExampleWrapper';
+
+const fields = typeof getFields === 'function' ? getFields() : getFields || [];
+const altFields = typeof getAltFields === 'function' ? getAltFields() : getAltFields || [];
 
 const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
   const navigate = useNavigate();
