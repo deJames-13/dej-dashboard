@@ -88,7 +88,8 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
         formSchema={_exampleSchema}
         element={({ isSubmitting, values }) => {
           const isFormChanged = !isEqual(initialValues, values);
-          const isButtonDisabled = isSubmitting || isCreating || isUpdating || isFetching || !isFormChanged;
+          const isProcessing = isSubmitting || isCreating || isUpdating;
+          const isButtonDisabled = isProcessing || isFetching || !isFormChanged;
 
           return (
             <div className="flex w-full">
@@ -99,6 +100,7 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
                 className="max-w-md"
                 disabled={isButtonDisabled}
               >
+                {isProcessing && <span className="loading loading-spinner"></span>}
                 {action === 'create' ? 'Create _Example' : 'Update _Example'}
               </Button>
             </div>
