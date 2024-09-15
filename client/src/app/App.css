@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Bungee&family=Gluten:wght@400;700&family=Poppins:wght@400;700&family=Playfair+Display:wght@400;700&family=Rubik:wght@400;700&family=Teachers:wght@400;700&display=swap');
+@import './styles/swal-dark.css';
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -36,5 +38,3 @@
 .drawer-content {
   padding-inline: 0px !important;
 }
-
-@import './styles/swal-dark.css';
