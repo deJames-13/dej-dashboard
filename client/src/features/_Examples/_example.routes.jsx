@@ -5,12 +5,14 @@ const _ExamplePage = React.lazy(() => import('./components/_ExamplePage'));
 const _ExampleList = React.lazy(() => import('./components/_ExampleList'));
 const _ExampleTable = React.lazy(() => import('./components/_ExampleTable'));
 
+const mainUrl = '/dashboard/_examples';
+
 export const _exampleRoutes = [
-  { path: '/dashboard/_examples/table', element: <_ExampleTable /> },
-  { path: '/dashboard/_examples/list', element: <_ExampleList /> },
-  { path: '/dashboard/_examples', element: <_ExamplePage /> },
+  { path: `${mainUrl}/table`, element: <_ExampleTable /> },
+  { path: `${mainUrl}/list`, element: <_ExampleList /> },
+  { path: mainUrl, element: <_ExamplePage /> },
   {
-    path: '/dashboard/_examples/create',
+    path: `${mainUrl}/create`,
     element: (
       <_ExampleForm
         action="create"
@@ -19,7 +21,7 @@ export const _exampleRoutes = [
     ),
   },
   {
-    path: '/dashboard/_examples/:slug/view',
+    path: `${mainUrl}/:slug/view`,
     element: (
       <_ExampleForm
         action="view"
@@ -28,7 +30,7 @@ export const _exampleRoutes = [
     ),
   },
   {
-    path: '/dashboard/_examples/:slug/edit',
+    path: `${mainUrl}/:slug/edit`,
     element: (
       <_ExampleForm
         action="edit"
