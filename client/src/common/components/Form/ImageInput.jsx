@@ -3,9 +3,7 @@ import PropTypes from 'prop-types';
 function ImageInput({ label, alt, refer, meta, formik, ...inputProps }) {
   return (
     <label className="w-full max-w-xs form-control">
-      <div className="label">
-        <span className="label-text">{label}</span>
-      </div>
+      {label && <span>{label}</span>}
       <input
         ref={refer}
         className={`w-full file-input file-input-bordered ${
@@ -20,10 +18,11 @@ function ImageInput({ label, alt, refer, meta, formik, ...inputProps }) {
           );
         }}
       />
-      <div className="label">
-        <span className="label-text-alt">{alt}</span>
-        <span className="label-text-alt"></span>
-      </div>
+      {alt && (
+        <div className="label">
+          <span className="label-text-alt">{alt}</span>
+        </div>
+      )}
     </label>
   );
 }
