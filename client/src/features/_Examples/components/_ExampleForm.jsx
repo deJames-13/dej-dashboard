@@ -1,6 +1,6 @@
 import { useSlug } from '@common';
 import { FormikForm } from '@common/components';
-import { confirmSave } from '@custom';
+import { confirmSave, requestError, toFormData } from '@custom';
 import isEqual from 'lodash/isEqual';
 import PropTypes from 'prop-types';
 import { useEffect, useMemo, useState } from 'react';
@@ -48,28 +48,30 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
     else set_ExampleSchema(action === 'create' ? fields : altFields);
   }, [action, slug, oldSlug, get_Example, navigate]);
 
+  const handleCreate = async (values) => {
+    await create_Example(values).unwrap();
+    toast.success('_Example created successfully');
+    navigate('/dashboard/_examples/table');
+  };
+  const handleUpdate = async (values) => {
+    const res = await update_Example({ id: _example.id, _example: values }).unwrap();
+    const updated_Example = res?.resource || { ..._example, ...values };
+    setSlug(updated_Example.slug);
+    toast.success('_Example updated successfully');
+  };
+
+  const onSubmit = async (values) => {
+    confirmSave(async () => handleSubmit(values));
+  };
+
   const handleSubmit = async (values) => {
-    confirmSave(async () => {
-      try {
-        if (action === 'create') {
-          await create_Example(values).unwrap();
-          toast.success('_Example created successfully');
-          navigate('/dashboard/_examples/table');
-        } else {
-          const res = await update_Example({ id: _example.id, _example: values }).unwrap();
-          const updated_Example = res?.resource || { ..._example, ...values };
-          setSlug(updated_Example.slug);
-          toast.success('_Example updated successfully');
-        }
-      } catch (error) {
-        const errors = error?.data?.errors?.details;
-        if (Array.isArray(errors)) {
-          errors.forEach((error) => {
-            toast.error(error?.msg || 'Error while performing action');
-          });
-        } else toast.error(error?.data?.message || 'Error while performing action.');
-      }
-    });
+    try {
+      values = toFormData(values);
+      if (action === 'create') await handleCreate(values);
+      else await handleUpdate(values);
+    } catch (error) {
+      requestError(error);
+    }
   };
 
   return (
@@ -81,7 +83,7 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
         formikProps={{
           initialValues,
           validationSchema: _exampleValidation,
-          onSubmit: handleSubmit,
+          onSubmit: onSubmit,
           enableReinitialize: true,
         }}
         className="flex flex-wrap gap-8"

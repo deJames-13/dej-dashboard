@@ -4,7 +4,6 @@ const errorWrapper = (fn, onError = () => {}) => {
   try {
     return fn();
   } catch (e) {
-    console.log(e);
     const errors = e?.data?.errors?.details;
     if (Array.isArray(errors)) {
       errors.forEach((error) => {
@@ -15,5 +14,14 @@ const errorWrapper = (fn, onError = () => {}) => {
   }
 };
 
-export default errorWrapper;
+const requestError = (error) => {
+  const errors = error?.data?.errors?.details;
+  if (Array.isArray(errors)) {
+    errors.forEach((error) => {
+      toast.error(error?.msg || 'Error while performing action');
+    });
+  } else toast.error(error?.data?.message || 'Error while performing action.');
+};
+
+export { errorWrapper, requestError };
 
