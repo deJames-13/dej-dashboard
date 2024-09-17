@@ -6,7 +6,11 @@ import { v4 as uuidv4 } from 'uuid';
 const storage = new CloudinaryStorage({
   cloudinary,
   params: {
-    tags: (req) => req?.headers?.resource || 'n/a',
+    tags: (req) => {
+      const tags = [req?.headers?.resource, req?.body?.id, req?.params?.id];
+      // clean duplicates
+      return tags.length > 0 ? tags : 'n/a';
+    },
     allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp'],
     public_id: (req, file) => file.originalname + '_' + uuidv4(),
   },

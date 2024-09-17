@@ -11,10 +11,6 @@ class _ExampleController extends Controller {
     update: _exampleUpdateRules,
   };
 
-  update = async (req, res) => {
-    return res.json({ message: 'Hello' });
-  };
-
   getBySlug = async (req, res) => {
     const { slug } = req.params;
     const data = await this.service.getBySlug(slug);
