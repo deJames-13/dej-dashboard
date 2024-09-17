@@ -5,14 +5,15 @@ import { v4 as uuidv4 } from 'uuid';
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    tags: (req) => {
-      const tags = [req?.headers?.resource, req?.body?.id, req?.params?.id];
-      // clean duplicates
-      return tags.length > 0 ? tags : 'n/a';
-    },
-    allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp'],
-    public_id: (req, file) => file.originalname + '_' + uuidv4(),
+  params: (req, file) => {
+    const tags = [req?.headers?.resource, req?.body?.id, req?.params?.id];
+    const folders = req?.headers?.resource || 'uploads';
+    return {
+      folders,
+      tags: tags.length > 0 ? tags : 'n/a',
+      allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp'],
+      public_id: (req, file) => file.originalname + '_' + uuidv4(),
+    };
   },
 });
 
