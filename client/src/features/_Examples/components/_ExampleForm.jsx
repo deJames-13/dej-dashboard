@@ -16,15 +16,14 @@ const fields = typeof getFields === 'function' ? getFields() : getFields || [];
 const altFields = typeof getAltFields === 'function' ? getAltFields() : getAltFields || [];
 
 const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
+  /* DECLARATIONS #################################################### */
   const navigate = useNavigate();
-
   const [_example, set_Example] = useState(null);
   const [_exampleSchema, set_ExampleSchema] = useState(fields);
   const [create_Example, { isLoading: isCreating }] = _exampleApi.useCreate_ExampleMutation();
   const [update_Example, { isLoading: isUpdating }] = _exampleApi.useUpdate_ExampleMutation();
   const [get_Example, { isLoading: isFetching }] = _exampleApi.useGet_ExampleMutation();
   const { slug, setSlug, oldSlug } = useSlug();
-
   const initialValues = useMemo(
     () =>
       _exampleSchema.reduce((acc, field) => {
@@ -33,26 +32,14 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
       }, {}),
     [_example, _exampleSchema, action]
   );
-
-  useEffect(() => {
-    const fetch_Example = async () => {
-      get_Example(slug).then((res) => {
-        if (res.error) {
-          toast.error(res.error.data.message);
-          navigate('/dashboard/_examples/table');
-        } else if (res.data) set_Example(res.data.resource);
-      });
-    };
-
-    if (slug && slug === oldSlug) fetch_Example();
-    else set_ExampleSchema(action === 'create' ? fields : altFields);
-  }, [action, slug, oldSlug, get_Example, navigate]);
+  /* END DECLARATIONS ################################################ */
 
   const handleCreate = async (values) => {
     await create_Example(values).unwrap();
     toast.success('_Example created successfully');
     navigate('/dashboard/_examples/table');
   };
+
   const handleUpdate = async (values) => {
     const res = await update_Example({ id: _example.id, _example: values }).unwrap();
     const updated_Example = res?.resource || { ..._example, ...values };
@@ -74,12 +61,27 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
     }
   };
 
+  useEffect(() => {
+    const fetch_Example = async () => {
+      get_Example(slug).then((res) => {
+        if (res.error) {
+          toast.error(res.error.data.message);
+          navigate('/dashboard/_examples/table');
+        } else if (res.data) set_Example(res.data.resource);
+      });
+    };
+
+    if (slug && slug === oldSlug) fetch_Example();
+    else set_ExampleSchema(action === 'create' ? fields : altFields);
+  }, [action, slug, oldSlug, get_Example, navigate]);
+
   return (
     <_ExampleWrapper
       title={title}
       prevUrl="/dashboard/_examples/table"
     >
       <FormikForm
+        formSchema={_exampleSchema}
         formikProps={{
           initialValues,
           validationSchema: _exampleValidation,
@@ -87,7 +89,6 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
           enableReinitialize: true,
         }}
         className="flex flex-wrap gap-8"
-        formSchema={_exampleSchema}
         element={({ isSubmitting, values }) => {
           const isFormChanged = !isEqual(initialValues, values);
           const isProcessing = isSubmitting || isCreating || isUpdating;

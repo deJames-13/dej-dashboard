@@ -1,6 +1,6 @@
 const getFields = () => [
   { label: 'Name', name: 'name', type: 'text' },
-  { label: 'Image', name: 'image', type: 'image', accept: 'image/*', multiple: false },
+  { label: 'Image', name: 'image', type: 'image', accept: 'image/*', multiple: true },
   // More getFields can be added here
 ];
 
