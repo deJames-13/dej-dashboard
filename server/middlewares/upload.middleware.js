@@ -6,7 +6,10 @@ import { v4 as uuidv4 } from 'uuid';
 const storage = new CloudinaryStorage({
   cloudinary,
   params: (req, file) => {
-    const tags = [req?.headers?.resource, req?.body?.id, req?.params?.id];
+    let tags = [req?.headers?.resource, req?.body?.id, req?.params?.id];
+    tags = tags.length > 0 ? tags : 'n/a';
+
+    const allowed_formats = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
     const folders = req?.headers?.resource || 'uploads';
     const sanitizedFilename = file?.originalname.replace(/[^a-zA-Z0-9]/g, '_');
     const public_id = `${sanitizedFilename}_${uuidv4()}`;
@@ -14,8 +17,8 @@ const storage = new CloudinaryStorage({
     return {
       folders,
       public_id,
-      tags: tags.length > 0 ? tags : 'n/a',
-      allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp'],
+      tags,
+      allowed_formats,
     };
   },
 });
