@@ -8,11 +8,14 @@ const storage = new CloudinaryStorage({
   params: (req, file) => {
     const tags = [req?.headers?.resource, req?.body?.id, req?.params?.id];
     const folders = req?.headers?.resource || 'uploads';
+    const sanitizedFilename = file?.originalname.replace(/[^a-zA-Z0-9]/g, '_');
+    const public_id = `${sanitizedFilename}_${uuidv4()}`;
+
     return {
       folders,
+      public_id,
       tags: tags.length > 0 ? tags : 'n/a',
       allowed_formats: ['jpg', 'png', 'jpeg', 'gif', 'webp'],
-      public_id: (req, file) => file.originalname + '_' + uuidv4(),
     };
   },
 });
