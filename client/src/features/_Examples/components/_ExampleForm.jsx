@@ -24,6 +24,7 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
   const [update_Example, { isLoading: isUpdating }] = _exampleApi.useUpdate_ExampleMutation();
   const [get_Example, { isLoading: isFetching }] = _exampleApi.useGet_ExampleMutation();
   const { slug, setSlug, oldSlug } = useSlug();
+
   const initialValues = useMemo(
     () =>
       _exampleSchema.reduce((acc, field) => {
