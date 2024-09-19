@@ -36,15 +36,15 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
 
   const handleCreate = async (values) => {
     await create_Example(values).unwrap();
-    toast.success('_Example created successfully');
     navigate('/dashboard/_examples/table');
+    toast.success('Create successful!');
   };
 
   const handleUpdate = async (values) => {
     const res = await update_Example({ id: _example.id, _example: values }).unwrap();
     const updated_Example = res?.resource || { ..._example, ...values };
     setSlug(updated_Example.slug);
-    toast.success('_Example updated successfully');
+    toast.success('Update successful!');
   };
 
   const onSubmit = async (values) => {
