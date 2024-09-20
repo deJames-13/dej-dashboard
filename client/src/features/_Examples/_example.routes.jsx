@@ -1,11 +1,10 @@
 import React from 'react';
+import { dashUrl as mainUrl } from './_example.api';
 
 const _ExampleForm = React.lazy(() => import('./components/_ExampleForm'));
 const _ExamplePage = React.lazy(() => import('./components/_ExamplePage'));
 const _ExampleList = React.lazy(() => import('./components/_ExampleList'));
 const _ExampleTable = React.lazy(() => import('./components/_ExampleTable'));
-
-const mainUrl = '/dashboard/_examples';
 
 export const _exampleRoutes = [
   { path: `${mainUrl}/table`, element: <_ExampleTable /> },

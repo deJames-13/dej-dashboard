@@ -2,6 +2,7 @@ import { apiSlice } from '@app/config';
 
 const resource = '_examples';
 const apiUrl = `/${resource}`;
+export const dashUrl = `/dashboard/${resource}`;
 const tags = [resource];
 const headers = {
   resource,

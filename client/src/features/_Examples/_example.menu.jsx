@@ -1,6 +1,5 @@
 import { FaPlus, FaTable, FaUsers } from 'react-icons/fa';
-
-const mainUrl = '/dashboard/_examples';
+import { dashUrl as mainUrl } from './_example.api';
 
 export const _exampleMenus = [
   {
