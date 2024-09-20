@@ -10,12 +10,20 @@ const storage = new CloudinaryStorage({
     tags = tags.length > 0 ? tags : 'n/a';
 
     const allowed_formats = ['jpg', 'png', 'jpeg', 'gif', 'webp'];
-    const folders = req?.headers?.resource || 'uploads';
+    const folder = req?.headers?.resource || 'uploads';
     const sanitizedFilename = file?.originalname.replace(/[^a-zA-Z0-9]/g, '_');
     const public_id = `${sanitizedFilename}_${uuidv4()}`;
 
+    cloudinary.api.create_folder(folder, (error) => {
+      if (error) {
+        console.error(error);
+      } else {
+        console.log(`Folder created: ${folder}`);
+      }
+    });
+
     return {
-      folders,
+      folder,
       public_id,
       tags,
       allowed_formats,
