@@ -12,19 +12,18 @@ class ImageController extends Controller {
   };
 
   store = async (req, res) => {
-    // const validData = await this.validator(req, res, this.rules.create);
-    // const data = await this.service?.create(validData);
-    // if (!data._id) return this.error({ res, message: 'Invalid data!' });
-    // const resource = this.resource?.make(data) || data;
-    // this.success({ res, message: 'Data created!', resource });
+    const validData = await this.validator(req, res, this.rules.create);
+    const data = await this.service?.create(validData);
+    if (!data._id) return this.error({ res, message: 'Invalid data!' });
+    const resource = this.resource?.make(data) || data;
+    this.success({ res, message: 'Data created!', resource });
   };
   update = async (req, res) => {
-    // const validData = await this.validator(req, res, this.rules.update);
-    // const data = await this.service?.update(req.params.id, validData);
-    // if (!data._id) return this.error({ res, message: 'Invalid data!' });
-    // const resource = this.resource?.make(data) || data;
-    // this.success({ res, message: 'Data updated!', resource });
-    res.json(req.files);
+    const validData = await this.validator(req, res, this.rules.update);
+    let data = await this.service?.update(req.params.id, validData);
+    if (!data._id) return this.error({ res, message: 'Invalid data!' });
+    const resource = this.resource?.make(data) || data;
+    this.success({ res, message: 'Data updated!', resource });
   };
 
   getBySlug = async (req, res) => {
