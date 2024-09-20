@@ -2,9 +2,10 @@ import { apiSlice } from '@app/config';
 
 const resource = '_examples';
 const apiUrl = `/${resource}`;
-const TAGS = [resource];
+const tags = [resource];
 const headers = {
   resource,
+  tags,
 };
 
 const _exampleApi = apiSlice.injectEndpoints({
