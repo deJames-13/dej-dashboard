@@ -10,7 +10,8 @@ export class Service {
 
   hasSlugField() {
     const hasSlug = this.slugField && this.model.schema.paths[this.slugField];
-    const hasFieldToSlugify = this.fieldToSlugify && this.model.schema.paths[this.fieldToSlugify];
+    const hasFieldToSlugify =
+      this.fieldToSlugify && this.model.schema.paths[this.fieldToSlugify];
     return hasSlug && hasFieldToSlugify;
   }
 
@@ -60,7 +61,9 @@ export class Service {
 
   async create(body) {
     this._checkModel();
-    const data = this.model.filterFillables(body);
+    const data = Array.isArray(body)
+      ? body.map((item) => this.model.filterFillables(item))
+      : this.model.filterFillables(body);
     const slug = this.makeSlug(data[this.fieldToSlugify]);
     if (slug) data[this.slugField] = slug;
     return this.model.create(data);
@@ -68,7 +71,9 @@ export class Service {
 
   async update(id, body) {
     this._checkModel();
-    const data = this.model.filterFillables(body);
+    const data = Array.isArray(body)
+      ? body.map((item) => this.model.filterFillables(item))
+      : this.model.filterFillables(body);
     const slug = this.makeSlug(data[this.fieldToSlugify]);
     if (slug) data[this.slugField] = slug;
     return this.model.findByIdAndUpdate(id, data, { new: true });
