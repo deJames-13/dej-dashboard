@@ -54,7 +54,7 @@ const UserForm = ({ title = 'User Form', action = 'create' }) => {
         await updateUser({ id, user: values }).unwrap();
         toast.success('User updated successfully');
       }
-      navigate('/dashboard/users/table');
+      // navigate('/dashboard/users/table');
     } catch (e) {
       const errors = e?.data?.errors?.details;
       if (Array.isArray(errors)) {
