@@ -23,7 +23,7 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
   const [create_Example, { isLoading: isCreating }] = _exampleApi.useCreate_ExampleMutation();
   const [update_Example, { isLoading: isUpdating }] = _exampleApi.useUpdate_ExampleMutation();
   const [get_Example, { isLoading: isFetching }] = _exampleApi.useGet_ExampleMutation();
-  const { slug, setSlug, oldSlug } = useSlug();
+  const { slug, setSlug } = useSlug();
 
   const initialValues = useMemo(
     () =>
@@ -72,9 +72,9 @@ const _ExampleForm = ({ title = '_Example Form', action = 'create' }) => {
       });
     };
 
-    if (slug && slug === oldSlug) fetch_Example();
+    if (slug) fetch_Example();
     else set_ExampleSchema(action === 'create' ? fields : altFields);
-  }, [action, slug, oldSlug, get_Example, navigate]);
+  }, [action, slug, get_Example, navigate]);
 
   return (
     <_ExampleWrapper
