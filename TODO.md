@@ -1,7 +1,8 @@
 # From Lecture
+
 ---
 
-- [ ] Reset Password Token 
+- [ ] Reset Password Token
 - [ ] Forgot Password
 - [ ] Nodemailer Email Feature
 - [ ] Searching and Filtering
