@@ -2,7 +2,6 @@ import * as features from '#features';
 
 const v1 = [
   // NEW ROUTE HERE ->
-    ...features.imageRoutes,
   ...features.userRoutes,
   ...features._exampleRoutes,
 ];
