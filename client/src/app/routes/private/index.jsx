@@ -12,7 +12,6 @@ const privateRoutes = [
         element: <Dashboard />,
       },
       // NEW ROUTE HERE ->
-    ...features.imageRoutes,
       ...features.userRoutes,
       ...features._exampleRoutes,
     ],
