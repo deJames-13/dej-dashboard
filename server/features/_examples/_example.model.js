@@ -1,4 +1,5 @@
 import { Schema } from '#lib';
+import { imageSchema } from '#utils';
 
 const _Example = new Schema({
   name: '_Example',
@@ -12,6 +13,7 @@ const _Example = new Schema({
       slug: {
         type: String,
       },
+      image: [{ imageSchema }],
     },
     { timestamps: true },
   ],
