@@ -12,9 +12,6 @@ class UserController extends Controller {
     update: userUpdateRules,
   };
 
-  // @desc    Get a refreshed token from current user
-  // route    GET /api/users/refresh
-  // @access  Public
   refresh = async (req, res) => {
     if (!req.user?._id) throw new Errors.Unauthorized('Invalid credentials!');
     const token = await this.service.refreshToken(req.user._id);
@@ -27,9 +24,6 @@ class UserController extends Controller {
     });
   };
 
-  // @desc    Register a new user
-  // route    POST /api/users
-  // @access  Public
   register = async (req, res) => {
     if (tokenExists(req, this.service.authToken)) return this.error({ res, message: 'Already authenticated!' });
 
@@ -46,9 +40,6 @@ class UserController extends Controller {
     });
   };
 
-  // @desc    Authenticate user & get token
-  // route    POST /api/users/authenticate
-  // @access  Public
   authenticate = async (req, res) => {
     if (tokenExists(req, this.service.authToken)) throw new Errors.BadRequest('Already authenticated!');
 
@@ -65,18 +56,12 @@ class UserController extends Controller {
     });
   };
 
-  // @desc    Log user out
-  // route    POST /api/users/logout
-  // @access  Public
   logout = async (req, res) => {
     const token = await this.service.logout();
     res.cookie(...token);
     this.success({ res, message: 'Logged out!' });
   };
 
-  // @desc    Get user profile
-  // route    GET /api/users/profile
-  // @access  Private
   getProfile = async (req, res) => {
     const user = req.user;
 
@@ -90,9 +75,6 @@ class UserController extends Controller {
     });
   };
 
-  // @desc    Update user profile
-  // route    PUT /api/users/profile
-  // @access  Private
   updateProfile = async (req, res) => {
     const validData = await this.validator(req, res, this.rules.update);
     const user = await this.service.updateUser(req.user._id, validData);
