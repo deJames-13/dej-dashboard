@@ -35,7 +35,7 @@ const User = new Schema({
 User.statics.fillables = ['username', 'email', 'password'];
 User.statics.hidden = ['password'];
 
-User.statics.hashPassword = async (password) => {
+User.methods.hashPassword = async function (password) {
   const salt = await bcrypt.genSalt(10);
   return await bcrypt.hash(password, salt);
 };
@@ -52,7 +52,7 @@ User.methods.getResetPasswordToken = function () {
 };
 
 User.pre('save', async function (next) {
-  if (this.isModified('password')) this.password = await this.constructor.hashPassword(this.password);
+  if (this.isModified('password')) this.password = await this.hashPassword(this.password);
   next();
 });
 export default User.makeModel();
