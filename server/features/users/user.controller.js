@@ -1,5 +1,5 @@
 import { Controller } from '#lib';
-import { Errors, getBearerToken, tokenExists } from '#utils';
+import { Errors, getBearerToken, sendEmail, tokenExists } from '#utils';
 import UserResource from './user.resource.js';
 import UserService from './user.service.js';
 import { userCreateRules, userUpdateRules } from './user.validation.js';
@@ -31,8 +31,7 @@ class UserController extends Controller {
   // route    POST /api/users
   // @access  Public
   register = async (req, res) => {
-    if (tokenExists(req, this.service.authToken))
-      return this.error({ res, message: 'Already authenticated!' });
+    if (tokenExists(req, this.service.authToken)) return this.error({ res, message: 'Already authenticated!' });
 
     const validData = await this.validator(req, res, this.rules.create);
     const { user, token } = await this.service.registerUser(validData);
@@ -51,8 +50,7 @@ class UserController extends Controller {
   // route    POST /api/users/authenticate
   // @access  Public
   authenticate = async (req, res) => {
-    if (tokenExists(req, this.service.authToken))
-      throw new Errors.BadRequest('Already authenticated!');
+    if (tokenExists(req, this.service.authToken)) throw new Errors.BadRequest('Already authenticated!');
 
     const { email, password } = req.body;
     const { user, token } = await this.service.authenticate(email, password);
@@ -104,6 +102,41 @@ class UserController extends Controller {
       message: 'Profile updated!',
       user: this.resource.make(user),
       token: getBearerToken(req),
+    });
+  };
+
+  forgotPassword = async (req, res) => {
+    const { email } = req.body;
+    const { user, token } = await this.service.forgotPassword(email);
+    const resetUrl = `${req.protocol}://${req.get('host')}/password/reset/${token}`;
+    const message = `Your password reset token is as follow:\n\n${resetUrl}\n\nIf you have not requested this email, then ignore it.`;
+
+    try {
+      await sendEmail({
+        email: user.email,
+        subject: 'Password Recovery',
+        message,
+      });
+      this.success({ res, message: `Email sent to: ${user.email}` });
+    } catch (error) {
+      user.resetPasswordToken = undefined;
+      user.resetPasswordExpire = undefined;
+      await user.save({ validateBeforeSave: false });
+      throw new Errors.InternalServerError(error.message);
+    }
+  };
+
+  resetPassword = async (req, res) => {
+    const validData = await this.validator(req, res, this.rules.update);
+    const { password } = req.body;
+    const token = req.params.token;
+    const { user, token: newToken } = await this.service.resetPassword(token, password);
+    res.cookie(...newToken);
+    this.success({
+      res,
+      message: 'Password reset!',
+      user: this.resource.make(user),
+      token: newToken[1],
     });
   };
 }

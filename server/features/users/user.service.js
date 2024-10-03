@@ -11,15 +11,6 @@ class UserService extends Service {
     return token;
   }
 
-  // TODO: Implement the forgotPassword method
-  async forgotPassword(email) {
-    const user = await this.model?.findOne({ email: email });
-    if (!user) throw new Errors.NotFound('User not found!');
-
-    const resetToken = await this.model.getResetPasswordToken();
-    await user.save({ validateBeforeSave: false });
-  }
-
   async registerUser(body) {
     const userExists = await this.checkIfExists({ email: body.email });
     if (userExists) throw new Errors.BadRequest('User with that email already exists!');
@@ -52,6 +43,32 @@ class UserService extends Service {
     if (data.password) data.password = await this.model?.hashPassword(data.password);
     const user = await this.model?.findByIdAndUpdate(id, data, { new: true });
     return user;
+  }
+
+  async forgotPassword(email) {
+    const user = await this.model?.findOne({ email: email });
+    if (!user) throw new Errors.NotFound('User not found!');
+
+    const resetToken = await this.model.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+    return { user, resetToken };
+  }
+
+  async resetPassword(token, password) {
+    const resetToken = crypto.createHash('sha256').update(token).digest('hex');
+    const user = await this.model.findOne({
+      resetPasswordToken: resetToken,
+      resetPasswordExpire: { $gt: Date.now() },
+    });
+
+    if (!resetPasswordToken) throw new Errors.BadRequest('Invalid reset token!');
+
+    user.password = password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save();
+    const token = generateToken(user._id, this.authToken);
+    return { user, token };
   }
 }
 

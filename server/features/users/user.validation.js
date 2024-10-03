@@ -1,8 +1,7 @@
 import { check } from 'express-validator';
 
 const matchPassword = (value, { req }) => {
-  if (value !== req.body.confirm_password)
-    throw new Error('Password does not match!');
+  if (value !== req.body.confirm_password) throw new Error('Password does not match!');
   return value;
 };
 
@@ -26,7 +25,7 @@ const userCreateRules = () => {
 
 const userUpdateRules = () => {
   return [
-    check('email').isEmail().withMessage('Email is invalid'),
+    check('email').isEmail().withMessage('Email is invalid').optional(),
     check('username')
       .optional()
       .isString()
