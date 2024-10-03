@@ -11,10 +11,18 @@ class UserService extends Service {
     return token;
   }
 
+  // TODO: Implement the forgotPassword method
+  async forgotPassword(email) {
+    const user = await this.model?.findOne({ email: email });
+    if (!user) throw new Errors.NotFound('User not found!');
+
+    const resetToken = await this.model.getResetPasswordToken();
+    await user.save({ validateBeforeSave: false });
+  }
+
   async registerUser(body) {
     const userExists = await this.checkIfExists({ email: body.email });
-    if (userExists)
-      throw new Errors.BadRequest('User with that email already exists!');
+    if (userExists) throw new Errors.BadRequest('User with that email already exists!');
 
     const user = await this.create(body);
     const token = generateToken(user._id, this.authToken);
@@ -38,12 +46,10 @@ class UserService extends Service {
       email: body.email,
       _id: { $ne: id },
     });
-    if (userExists)
-      throw new Errors.BadRequest('User with that email already exists!');
+    if (userExists) throw new Errors.BadRequest('User with that email already exists!');
 
     const data = this.model?.filterFillables(body);
-    if (data.password)
-      data.password = await this.model?.hashPassword(data.password);
+    if (data.password) data.password = await this.model?.hashPassword(data.password);
     const user = await this.model?.findByIdAndUpdate(id, data, { new: true });
     return user;
   }
